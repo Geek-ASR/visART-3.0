@@ -4,14 +4,62 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { PlayCircle } from 'lucide-react';
+import { PlayCircle, BookOpen, Terminal, Users, GitFork } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
-import Image from 'next/image';
 
 const titleText = "The Art of Visualizing Algorithms";
 const waveSpeed = 50;
 const greenDuration = 700;
+
+const AnimatedStat = ({ icon: IconComponent, value, label, duration = 1500 }: { icon: React.ElementType, value: string, label: string, duration?: number }) => {
+  const [displayValue, setDisplayValue] = useState("0");
+
+  useEffect(() => {
+    const targetNumberMatch = value.match(/\d+/);
+    if (!targetNumberMatch) {
+      setDisplayValue(value); // If no number, display as is
+      return;
+    }
+    const targetNumber = parseInt(targetNumberMatch[0]);
+    const suffix = value.substring(targetNumberMatch[0].length); // e.g., "+" or ""
+
+    if (targetNumber === 0) {
+      setDisplayValue(value);
+      return;
+    }
+
+    let currentNumber = 0;
+    const steps = duration / 16; // Aim for ~60fps updates
+    const increment = targetNumber / steps;
+
+    const timer = setInterval(() => {
+      currentNumber += increment;
+      if (currentNumber >= targetNumber) {
+        currentNumber = targetNumber;
+        clearInterval(timer);
+      }
+      setDisplayValue(Math.ceil(currentNumber).toString() + suffix);
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [value, label, duration]);
+
+  return (
+    <div className="flex flex-col items-center text-center p-6 rounded-xl shadow-lg bg-card/80 hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 backdrop-blur-sm border border-primary/20">
+      <IconComponent className="w-10 h-10 md:w-12 md:h-12 mb-3 text-accent" />
+      <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{displayValue}</p>
+      <p className="text-sm md:text-base text-muted-foreground">{label}</p>
+    </div>
+  );
+};
+
+const statsData = [
+  { value: "40+", label: "DSA Topics", icon: BookOpen },
+  { value: "200+", label: "Coding Challenges", icon: Terminal },
+  { value: "25+", label: "Workshops", icon: Users },
+  { value: "10+", label: "Learning Paths", icon: GitFork },
+];
 
 export function HeroSection() {
   const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
@@ -90,15 +138,16 @@ export function HeroSection() {
             <Link href="/visualizer">Explore All Features</Link>
           </Button>
         </div>
-        <div className="mt-16 rounded-lg shadow-2xl mx-auto overflow-hidden" style={{ maxWidth: '800px' }}>
-          <Image
-            src="https://placehold.co/800x450.png"
-            alt="Algorithm visualization placeholder"
-            width={800}
-            height={450}
-            className="w-full h-auto"
-            data-ai-hint="abstract technology"
-          />
+        
+        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          {statsData.map((stat) => (
+            <AnimatedStat
+              key={stat.label}
+              icon={stat.icon}
+              value={stat.value}
+              label={stat.label}
+            />
+          ))}
         </div>
       </div>
     </section>
