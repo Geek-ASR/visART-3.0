@@ -11,7 +11,14 @@ export function Navbar() {
   const pathname = usePathname();
   const isLandingPage = pathname === '/';
 
-  const authButtonClassName = "bg-gradient-to-br from-fuchsia-500 via-pink-500 to-orange-400 text-white font-semibold shadow-lg shadow-pink-500/50 hover:shadow-xl hover:shadow-pink-400/70 focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 transition-all duration-300 transform hover:scale-105";
+  const wrapperAuthButtonClassName = "p-[1.5px] rounded-lg bg-gradient-to-br from-fuchsia-500 via-pink-500 to-orange-400 shadow-lg shadow-pink-500/50 hover:shadow-xl hover:shadow-pink-400/70 transition-all duration-300 transform hover:scale-105";
+
+  let authButtonInnerClasses = "";
+  if (isLandingPage) {
+    authButtonInnerClasses = "w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-white font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150";
+  } else {
+    authButtonInnerClasses = "w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-primary transition-colors duration-150";
+  }
 
   return (
     <header
@@ -38,11 +45,13 @@ export function Navbar() {
         </Link>
 
         {isLandingPage ? (
-          <Button asChild className={authButtonClassName}>
-            <Link href="/auth">
-              <CheckSquare className="mr-2 h-5 w-5" /> Sign Up / Sign In
-            </Link>
-          </Button>
+          <div className={wrapperAuthButtonClassName}>
+            <Button asChild className={authButtonInnerClasses}>
+              <Link href="/auth">
+                <CheckSquare className="mr-2 h-5 w-5" /> Sign Up / Sign In
+              </Link>
+            </Button>
+          </div>
         ) : (
           <nav className="space-x-4 flex items-center">
             <Button variant="ghost" asChild>
@@ -60,11 +69,13 @@ export function Navbar() {
                 <BarChart3 className="mr-2 h-5 w-5" /> My Progress
               </Link>
             </Button>
-            <Button asChild className={authButtonClassName}>
-              <Link href="/auth">
-                <CheckSquare className="mr-2 h-5 w-5" /> Sign Up / Sign In
-              </Link>
-            </Button>
+            <div className={wrapperAuthButtonClassName}>
+              <Button asChild className={authButtonInnerClasses}>
+                <Link href="/auth">
+                  <CheckSquare className="mr-2 h-5 w-5" /> Sign Up / Sign In
+                </Link>
+              </Button>
+            </div>
           </nav>
         )}
       </div>
