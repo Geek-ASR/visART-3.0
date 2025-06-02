@@ -46,7 +46,7 @@ const AnimatedStat = ({ icon: IconComponent, value, label, duration = 1500 }: { 
   }, [value, label, duration]);
 
   return (
-    <div className="flex flex-col items-center text-center p-2 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-primary/20 hover:border-accent">
+    <div className="flex flex-col items-center text-center py-4 px-2 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-primary/20 hover:border-accent">
       <IconComponent className="w-5 h-5 md:w-6 md:h-6 mb-3 text-accent" />
       <p className="text-xl md:text-2xl font-bold text-primary mb-1">{displayValue}</p>
       <p className="text-sm md:text-base text-muted-foreground">{label}</p>
