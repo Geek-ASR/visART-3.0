@@ -72,7 +72,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30 rounded-lg shadow-lg">
+    <section className="py-20 md:py-32">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold font-headline mb-6 text-primary">
           {renderAnimatedTitle()}
