@@ -46,9 +46,9 @@ const AnimatedStat = ({ icon: IconComponent, value, label, duration = 1500 }: { 
   }, [value, label, duration]);
 
   return (
-    <div className="flex flex-col items-center text-center p-6 rounded-xl shadow-lg bg-card/80 hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 backdrop-blur-sm border border-primary/20">
-      <IconComponent className="w-10 h-10 md:w-12 md:h-12 mb-3 text-accent" />
-      <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{displayValue}</p>
+    <div className="flex flex-col items-center text-center p-2 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-primary/20">
+      <IconComponent className="w-5 h-5 md:w-6 md:h-6 mb-3 text-accent" />
+      <p className="text-xl md:text-2xl font-bold text-primary mb-1">{displayValue}</p>
       <p className="text-sm md:text-base text-muted-foreground">{label}</p>
     </div>
   );
@@ -139,7 +139,7 @@ export function HeroSection() {
           </Button>
         </div>
         
-        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {statsData.map((stat) => (
             <AnimatedStat
               key={stat.label}
