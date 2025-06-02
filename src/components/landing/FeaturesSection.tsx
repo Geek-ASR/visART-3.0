@@ -35,15 +35,22 @@ export function FeaturesSection() {
         <div
           className="absolute top-[-30%] left-[-40%]
                      w-[200%] h-[160%]
-                     bg-secondary/40
+                     bg-secondary/30 
                      transform rotate-[-20deg]
                      rounded-full"
         />
         <div
           className="absolute top-[-35%] left-[-30%]
                      w-[200%] h-[170%]
-                     bg-primary/20
+                     bg-primary/15 
                      transform rotate-[-25deg]
+                     rounded-full opacity-80"
+        />
+        <div
+          className="absolute top-[-20%] left-[-50%]
+                     w-[220%] h-[150%]
+                     bg-accent/10 
+                     transform rotate-[-15deg]
                      rounded-full opacity-70"
         />
       </div>
