@@ -27,11 +27,23 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4">
+    <section className="relative overflow-hidden py-16 md:py-24 bg-background">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-0"
+      >
+        <div
+          className="absolute top-[-25%] left-[-35%]
+                     w-[180%] h-[150%]
+                     bg-secondary/30
+                     transform rotate-[-20deg]
+                     rounded-full"
+        />
+      </div>
+      <div className="relative container mx-auto px-4 z-[1]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
               <CardHeader className="items-center text-center">
                 {feature.icon}
                 <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
