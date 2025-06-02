@@ -129,11 +129,17 @@ export function HeroSection() {
           Visualize, learn, and code Data Structures and Algorithms like never before. VisART provides various features to enhance your logic-building skills and excel in problem-solving.
         </p>
         <div className="flex items-center justify-center space-x-4">
-          <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Link href="/solve">
-              <PlayCircle className="mr-2 h-5 w-5" /> Get Started
-            </Link>
-          </Button>
+          <div className="p-[1.5px] rounded-lg bg-gradient-to-br from-purple-400 via-fuchsia-500 to-indigo-600 shadow-[0_0_8px_1px] shadow-purple-500/40 hover:shadow-[0_0_12px_2px] hover:shadow-purple-500/50 transition-all duration-300">
+            <Button
+              size="lg"
+              asChild
+              className="w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150"
+            >
+              <Link href="/solve">
+                <PlayCircle className="mr-2 h-5 w-5" /> Get Started
+              </Link>
+            </Button>
+          </div>
           <div className="p-[1.5px] rounded-lg bg-gradient-to-br from-purple-400 via-fuchsia-500 to-indigo-600 shadow-[0_0_8px_1px] shadow-purple-500/40 hover:shadow-[0_0_12px_2px] hover:shadow-purple-500/50 transition-all duration-300">
             <Button
               size="lg"
