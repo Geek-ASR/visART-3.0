@@ -11,13 +11,13 @@ export function Navbar() {
   const pathname = usePathname();
   const isLandingPage = pathname === '/';
 
-  const wrapperAuthButtonClassName = "p-[1.5px] rounded-lg bg-gradient-to-br from-fuchsia-500 via-pink-500 to-orange-400 shadow-lg shadow-pink-500/50 hover:shadow-xl hover:shadow-pink-400/70 transition-all duration-300 transform hover:scale-105";
+  const wrapperAuthButtonClassName = "p-[1.5px] rounded-lg bg-gradient-to-br from-purple-500 via-indigo-500 to-violet-600 shadow-lg shadow-accent/50 hover:shadow-xl hover:shadow-accent/70 transition-all duration-300 transform hover:scale-105";
 
   let authButtonInnerClasses = "";
   if (isLandingPage) {
-    authButtonInnerClasses = "w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150";
+    authButtonInnerClasses = "w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150";
   } else {
-    authButtonInnerClasses = "w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary transition-colors duration-150";
+    authButtonInnerClasses = "w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-secondary transition-colors duration-150";
   }
 
   return (
