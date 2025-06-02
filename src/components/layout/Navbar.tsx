@@ -15,9 +15,9 @@ export function Navbar() {
 
   let authButtonInnerClasses = "";
   if (isLandingPage) {
-    authButtonInnerClasses = "w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-white font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150";
+    authButtonInnerClasses = "w-full bg-background/80 backdrop-blur-sm hover:bg-background/90 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background/80 transition-colors duration-150";
   } else {
-    authButtonInnerClasses = "w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-primary transition-colors duration-150";
+    authButtonInnerClasses = "w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold rounded-md focus-visible:ring-2 focus-visible:ring-pink-400 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary transition-colors duration-150";
   }
 
   return (
