@@ -1,9 +1,31 @@
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { AnimationOverlay } from '@/components/landing/AnimationOverlay';
 
 export default function HomePage() {
+  const [animationComplete, setAnimationComplete] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('animationPlayed')) {
+      setAnimationComplete(true);
+    }
+  }, []);
+
+  const handleAnimationFinish = () => {
+    setAnimationComplete(true);
+    sessionStorage.setItem('animationPlayed', 'true');
+  };
+
+  if (!animationComplete) {
+    return <AnimationOverlay onAnimationComplete={handleAnimationFinish} />;
+  }
+
   return (
     <div className="space-y-16 md:space-y-24">
       <HeroSection />
