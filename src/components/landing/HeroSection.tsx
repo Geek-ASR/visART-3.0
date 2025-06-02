@@ -105,8 +105,6 @@ export function HeroSection() {
               </filter>
             </defs>
 
-            <rect width="100%" height="100%" fill="#FFFDE7" /> {/* Light cream background for the SVG canvas */}
-
             {/* Abstract Figure */}
             <g transform="translate(150, 225)"> 
               {/* Main body */}
