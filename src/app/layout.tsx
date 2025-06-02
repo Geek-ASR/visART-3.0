@@ -4,6 +4,7 @@ import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
+import { WaveBackground } from '@/components/layout/WaveBackground';
 
 export const metadata: Metadata = {
   title: 'AlgoVisuals - Master DSA Interactively',
@@ -23,32 +24,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning={true}>
-        {/* Global Wave Background */}
-        <div aria-hidden="true" className="fixed inset-0 z-[-1] overflow-hidden">
-          <div
-            className="absolute rounded-full transform
-                       top-[-80vh] left-[-50vw]
-                       w-[200vw] h-[200vh]
-                       bg-primary/20 
-                       rotate-[-40deg]"
-          />
-          <div
-            className="absolute rounded-full transform
-                       bottom-[-70vh] right-[-60vw]
-                       w-[220vw] h-[180vh]
-                       bg-accent/20 
-                       rotate-[30deg]"
-          />
-          <div
-            className="absolute rounded-full transform
-                       top-[0vh] left-[-70vw]
-                       w-[250vw] h-[150vh]
-                       bg-foreground/10
-                       rotate-[-55deg]"
-          />
-        </div>
+        {/* Global Wave Background - Now managed by WaveBackground component */}
+        <WaveBackground />
         
-        {/* Main Content Wrapper - Now transparent by default, waves will show through */}
+        {/* Main Content Wrapper - Transparent by default, waves show through */}
         <div className="relative z-0 flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8">
