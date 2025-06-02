@@ -31,7 +31,7 @@ export function HeroSection() {
     return () => {
       timeouts.forEach(clearTimeout);
     };
-  }, []);
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
   return (
     <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30 rounded-lg shadow-lg">
@@ -45,7 +45,7 @@ export function HeroSection() {
                 animatedChars[index] ? 'text-green-400' : '' // Inherits text-primary if not animated
               )}
             >
-              {char === ' ' ? '\u00A0' : char} {/* Preserves spaces */}
+              {char === ' ' ? '\u00A0' : char} {/* Ensures spaces are rendered correctly */}
             </span>
           ))}
         </h1>
