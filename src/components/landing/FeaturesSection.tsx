@@ -33,11 +33,18 @@ export function FeaturesSection() {
         className="absolute inset-0 pointer-events-none z-0"
       >
         <div
-          className="absolute top-[-25%] left-[-35%]
-                     w-[180%] h-[150%]
-                     bg-secondary/30
+          className="absolute top-[-30%] left-[-40%]
+                     w-[200%] h-[160%]
+                     bg-secondary/40
                      transform rotate-[-20deg]
                      rounded-full"
+        />
+        <div
+          className="absolute top-[-35%] left-[-30%]
+                     w-[200%] h-[170%]
+                     bg-primary/20
+                     transform rotate-[-25deg]
+                     rounded-full opacity-70"
         />
       </div>
       <div className="relative container mx-auto px-4 z-[1]">
