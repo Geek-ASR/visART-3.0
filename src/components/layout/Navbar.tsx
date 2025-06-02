@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -35,7 +36,7 @@ export function Navbar() {
         </Link>
 
         {isLandingPage ? (
-          <Button variant="secondary" asChild>
+          <Button variant="secondary" asChild className="border border-border shadow-lg">
             <Link href="/auth"> {/* Updated href to a generic /auth, adjust as needed */}
               <CheckSquare className="mr-2 h-5 w-5" /> Sign Up / Sign In
             </Link>

@@ -85,11 +85,11 @@ export function HeroSection() {
         <div className="space-x-4">
           <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Link href="/solve">
-              <PlayCircle className="mr-2 h-5 w-5" /> Start Learning
+              <PlayCircle className="mr-2 h-5 w-5" /> Get Started
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="/visualizer">Explore Visualizer</Link>
+            <Link href="/visualizer">Explore All Features</Link>
           </Button>
         </div>
         <div className="mt-16">
