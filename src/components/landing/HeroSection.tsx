@@ -82,7 +82,7 @@ export function HeroSection() {
         <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
           Visualize, learn, and code Data Structures and Algorithms like never before. VisART provides various features to enhance your logic-building skills and excel in problem-solving.
         </p>
-        <div className="space-x-4">
+        <div className="flex items-center justify-center space-x-4">
           <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Link href="/solve">
               <PlayCircle className="mr-2 h-5 w-5" /> Get Started
