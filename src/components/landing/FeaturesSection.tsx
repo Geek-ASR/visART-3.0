@@ -1,3 +1,4 @@
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { BookOpen, Eye, Terminal, TrendingUp } from 'lucide-react';
 
@@ -28,9 +29,6 @@ export function FeaturesSection() {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-12 text-primary">
-          Why AlgoVisuals?
-        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
