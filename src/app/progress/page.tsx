@@ -1,10 +1,11 @@
+
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { BarChart, BookOpen, CheckCircle, ListChecks, PieChartIcon } from 'lucide-react';
-import { ChartContainer, ChartTooltip, ChartTooltipContent, BarChart as RechartsBarChart } from '@/components/ui/chart';
-import { Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { BarChart as BarChartIcon, BookOpen, CheckCircle, ListChecks } from 'lucide-react';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart as RechartsBarChart } from 'recharts';
 
 const overallProgress = {
   problemsSolved: 15,
@@ -85,7 +86,7 @@ export default function ProgressPage() {
 
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="flex items-center"><BarChart className="mr-2 h-6 w-6 text-primary" /> Progress by Topic</CardTitle>
+          <CardTitle className="flex items-center"><BarChartIcon className="mr-2 h-6 w-6 text-primary" /> Progress by Topic</CardTitle>
           <CardDescription>Detailed breakdown of your problem-solving progress across different DSA topics.</CardDescription>
         </CardHeader>
         <CardContent className="h-[400px] w-full">
