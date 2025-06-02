@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -14,19 +15,19 @@ const wavesConfig: WaveProps[] = [
   {
     id: 'wave1',
     initialClassName: 'top-[-80vh] left-[-50vw] w-[200vw] h-[200vh] bg-primary/20',
-    parallaxFactor: 0.1,
+    parallaxFactor: 0.05, // Was 0.1
     rotateDeg: -40,
   },
   {
     id: 'wave2',
     initialClassName: 'bottom-[-70vh] right-[-60vw] w-[220vw] h-[180vh] bg-accent/20',
-    parallaxFactor: 0.2,
+    parallaxFactor: 0.1, // Was 0.2
     rotateDeg: 30,
   },
   {
     id: 'wave3',
     initialClassName: 'top-[0vh] left-[-70vw] w-[250vw] h-[150vh] bg-foreground/10',
-    parallaxFactor: 0.3,
+    parallaxFactor: 0.15, // Was 0.3
     rotateDeg: -55,
   },
 ];
