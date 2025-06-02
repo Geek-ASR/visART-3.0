@@ -8,10 +8,11 @@ interface WaveConfig {
   id: string;
   gradientId: string;
   pathD: string;
+  viewBox: string;
   startColor: string;
   endColor: string;
-  initialTopVh: number; // Approximate vertical position in vh units from the top
-  heightVh: number; // Approximate height of the wave layer in vh
+  initialTopVh: number; 
+  heightVh: number; 
   opacity: number;
   parallaxFactor: number;
 }
@@ -20,36 +21,36 @@ const wavesConfig: WaveConfig[] = [
   {
     id: 'wave-svg-1',
     gradientId: 'gradWave1',
-    // Gentle, broad wave for the background
     pathD: "M0,192 C200,100 400,280 600,192 S1000,100 1200,192 S1400,280 1600,192 L1600,350 L0,350 Z",
+    viewBox: "0 0 1600 350",
     startColor: 'hsl(215 50% 92% / 0.6)', // Light secondary
     endColor: 'hsl(215 40% 96% / 0.3)',   // Very light secondary
-    initialTopVh: 40, // Adjusted from 55
-    heightVh: 50, 
+    initialTopVh: 30, // Adjusted upwards, ensure it covers well
+    heightVh: 80,    // Increased height
     opacity: 0.8,
     parallaxFactor: 0.09,
   },
   {
     id: 'wave-svg-2',
     gradientId: 'gradWave2',
-    // Mid-ground wave with more definition
     pathD: "M0,224 C250,150 450,300 700,224 S950,150 1200,224 S1450,300 1600,224 L1600,350 L0,350 Z",
+    viewBox: "0 0 1600 350",
     startColor: 'hsl(260 60% 85% / 0.65)', // Light accent (purple)
     endColor: 'hsl(260 50% 92% / 0.35)',  // Very light accent
-    initialTopVh: 35, // Adjusted from 50
-    heightVh: 55,
+    initialTopVh: 25, // Adjusted upwards
+    heightVh: 80,    // Increased height
     opacity: 0.9,
     parallaxFactor: 0.06,
   },
   {
     id: 'wave-svg-3',
     gradientId: 'gradWave3',
-    // Foreground wave, most prominent
     pathD: "M0,256 C300,180 500,320 800,256 S1100,180 1400,256 S1700,320 1900,256 L1900,350 L0,350 Z",
+    viewBox: "0 0 1900 350", // Adjusted viewBox width to match path coordinates
     startColor: 'hsl(231 70% 80% / 0.7)', // Light primary (blue)
     endColor: 'hsl(231 60% 90% / 0.4)',   // Very light primary
-    initialTopVh: 30, // Adjusted from 45
-    heightVh: 60,
+    initialTopVh: 20, // Adjusted upwards
+    heightVh: 80,    // Increased height
     opacity: 1,
     parallaxFactor: 0.03,
   },
@@ -65,13 +66,11 @@ export function WaveBackground() {
         if (waveEl) {
           const config = wavesConfig[index];
           const translateY = scrollY * config.parallaxFactor;
-          // Apply only translateY for parallax, rotation is handled by SVG path
           waveEl.style.transform = `translateY(${translateY}px)`;
         }
       });
     };
     
-    // Initialize positions
     waveRefs.current.forEach((waveEl) => {
       if (waveEl) {
         waveEl.style.transform = `translateY(0px)`;
@@ -98,7 +97,7 @@ export function WaveBackground() {
           }}
         >
           <svg
-            viewBox="0 0 1600 350" // Adjusted viewBox width to match path coordinates
+            viewBox={wave.viewBox}
             preserveAspectRatio="none"
             className="w-full h-full"
           >
