@@ -10,43 +10,31 @@ interface AnimationNodeProps {
   isLast?: boolean;
 }
 
-const ChainLink: React.FC<{ orientation: 'horizontal' | 'vertical'; className?: string }> = ({ orientation, className }) => (
-  <div
-    className={cn(
-      'bg-slate-200 rounded-full',
-      orientation === 'horizontal' ? 'w-6 h-2 md:w-8 md:h-3' : 'w-2 h-6 md:w-3 md:h-8',
-      className
-    )}
-  />
-);
-
 const AnimationNode: React.FC<AnimationNodeProps> = ({ text, isVisible, isLast }) => {
   return (
     <div
       className={cn(
-        'flex flex-col md:flex-row items-center transition-all duration-700 ease-out', // Reduced duration
+        'flex flex-col md:flex-row items-center transition-all duration-500 ease-out', // Faster node animation
         isVisible
           ? 'opacity-100 transform md:translate-x-0 translate-y-0'
           : 'opacity-0 transform md:-translate-x-10 translate-y-10 md:translate-y-0'
       )}
     >
-      <div className="bg-slate-200 text-slate-800 p-4 md:p-6 rounded-lg shadow-xl text-center min-w-[150px] md:min-w-[200px] max-w-[200px] md:max-w-none">
+      <div className="relative bg-slate-200 text-slate-800 p-4 md:p-6 rounded-lg shadow-xl text-center min-w-[150px] md:min-w-[200px] max-w-[200px] md:max-w-none">
         <p className="text-sm md:text-lg font-semibold">{text}</p>
+        {isVisible && (
+          <div
+            className="sparkle absolute -top-2 -right-2 w-5 h-5 bg-yellow-400 rounded-full shadow-lg"
+            style={{ animationDelay: '0.1s' }} // Slight delay so node appears first
+          />
+        )}
       </div>
       {!isLast && (
         <>
-          {/* Desktop: Horizontal Chain */}
-          <div className="hidden md:flex items-center mx-1 md:mx-2">
-            <ChainLink orientation="horizontal" className="-mr-2" />
-            <ChainLink orientation="vertical" className="z-10" />
-            <ChainLink orientation="horizontal" className="-ml-2" />
-          </div>
-          {/* Mobile: Vertical Chain */}
-          <div className="flex md:hidden flex-col items-center my-1">
-            <ChainLink orientation="vertical" className="-mb-2" />
-            <ChainLink orientation="horizontal" className="z-10" />
-            <ChainLink orientation="vertical" className="-mt-2" />
-          </div>
+          {/* Desktop Connector: Horizontal Line */}
+          <div className="hidden md:block h-1.5 w-6 md:w-8 bg-slate-300 mx-2 md:mx-3 rounded-full" />
+          {/* Mobile Connector: Vertical Line */}
+          <div className="md:hidden w-1.5 h-6 bg-slate-300 my-2 rounded-full" />
         </>
       )}
     </div>
@@ -81,22 +69,20 @@ export function AnimationOverlay({ onAnimationComplete }: AnimationOverlayProps)
             newVisibleNodes[index] = true;
             return newVisibleNodes;
           });
-        }, index * 800) // Reduced stagger delay
+        }, index * 600) // Faster stagger delay
       );
     });
 
-    // After all nodes are set to appear, wait a bit then start fading out overlay
     timeouts.push(
       setTimeout(() => {
         setFadeOutOverlay(true);
-      }, nodesContent.length * 800 + 700) // Adjusted delay
+      }, nodesContent.length * 600 + 500) // Adjusted delay based on faster stagger and node animation
     );
     
-    // After fade out animation, call onAnimationComplete
     timeouts.push(
       setTimeout(() => {
         onAnimationComplete();
-      }, nodesContent.length * 800 + 700 + 700) // Adjusted delay for fade out (700ms)
+      }, nodesContent.length * 600 + 500 + 500) // Adjusted delay for fade out (500ms)
     );
 
     return () => {
@@ -109,10 +95,10 @@ export function AnimationOverlay({ onAnimationComplete }: AnimationOverlayProps)
       className={cn(
         'fixed inset-0 z-[9999] bg-black flex items-center overflow-hidden',
         fadeOutOverlay ? 'opacity-0 pointer-events-none' : 'opacity-100',
-        'transition-opacity duration-700 ease-in-out' // Reduced fade-out duration
+        'transition-opacity duration-500 ease-in-out' // Faster fade-out duration
       )}
     >
-      <div className="w-full flex justify-start items-center pl-4 sm:pl-6 md:pl-8 lg:pl-10"> {/* Adjusted padding */}
+      <div className="w-full flex justify-start items-center pl-4 sm:pl-6 md:pl-8 lg:pl-10">
           <div className="flex flex-col md:flex-row items-start md:items-center">
             {nodesContent.map((text, index) => (
               <AnimationNode
