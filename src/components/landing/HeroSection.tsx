@@ -10,23 +10,36 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 const titleText = "The Art of Visualizing Algorithms";
+const waveSpeed = 75; // ms per character
+const greenDuration = 500; // ms each char stays green
 
 export function HeroSection() {
-  // Create an array of only the non-space characters for animation state
   const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
   const [animatedCharsState, setAnimatedCharsState] = useState(Array(actualCharsToAnimate.length).fill(false));
 
   useEffect(() => {
     const timeouts: NodeJS.Timeout[] = [];
     actualCharsToAnimate.forEach((_, index) => {
+      // Timeout to turn character green
       timeouts.push(
         setTimeout(() => {
           setAnimatedCharsState((prev) => {
             const newAnimatedChars = [...prev];
-            newAnimatedChars[index] = true; // Animate non-space characters
+            newAnimatedChars[index] = true;
             return newAnimatedChars;
           });
-        }, index * 75) // Wave speed for each non-space character
+        }, index * waveSpeed)
+      );
+
+      // Timeout to revert character to original color
+      timeouts.push(
+        setTimeout(() => {
+          setAnimatedCharsState((prev) => {
+            const newAnimatedChars = [...prev];
+            newAnimatedChars[index] = false;
+            return newAnimatedChars;
+          });
+        }, index * waveSpeed + greenDuration)
       );
     });
 
@@ -41,16 +54,14 @@ export function HeroSection() {
     for (let i = 0; i < titleText.length; i++) {
       const char = titleText[i];
       if (char === ' ') {
-        // Render spaces as React Fragments containing a space string
         elements.push(<React.Fragment key={`space-${i}`}> </React.Fragment>);
       } else {
-        // Render non-space characters within spans for animation
         elements.push(
           <span
             key={`char-${i}`}
             className={cn(
               'transition-colors duration-300 ease-in-out',
-              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : ''
+              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : '' // Empty string for color reverts to parent color
             )}
           >
             {char}
