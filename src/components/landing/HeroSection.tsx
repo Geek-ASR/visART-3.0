@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 const titleText = "The Art of Visualizing Algorithms";
-const waveSpeed = 75; // ms per character
-const greenDuration = 500; // ms each char stays green
+const waveSpeed = 50; // ms per character (decreased from 75 for faster wave)
+const greenDuration = 700; // ms each char stays green (increased from 500 for wider wave)
 
 export function HeroSection() {
   const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
