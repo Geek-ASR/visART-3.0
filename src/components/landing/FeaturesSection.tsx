@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { BookOpen, Eye, Terminal, Lightbulb, TrendingUp } from 'lucide-react';
+import { BookOpen, Eye, Terminal, TrendingUp } from 'lucide-react';
 
 const features = [
   {
@@ -16,11 +16,6 @@ const features = [
     icon: <Terminal className="h-10 w-10 text-primary mb-4" />,
     title: 'In-Portal Coding',
     description: 'Solve DSA problems directly in our environment with real-time feedback on basic test cases.',
-  },
-  {
-    icon: <Lightbulb className="h-10 w-10 text-primary mb-4" />,
-    title: 'AI-Assisted Learning',
-    description: 'Stuck on a problem? Get intelligent hints or full solutions from our AI tutor.',
   },
   {
     icon: <TrendingUp className="h-10 w-10 text-primary mb-4" />,
