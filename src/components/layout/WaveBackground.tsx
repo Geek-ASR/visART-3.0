@@ -4,31 +4,54 @@
 import { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
-interface WaveProps {
+interface WaveConfig {
   id: string;
-  initialClassName: string;
+  gradientId: string;
+  pathD: string;
+  startColor: string;
+  endColor: string;
+  initialTopVh: number; // Approximate vertical position in vh units from the top
+  heightVh: number; // Approximate height of the wave layer in vh
+  opacity: number;
   parallaxFactor: number;
-  rotateDeg: number;
 }
 
-const wavesConfig: WaveProps[] = [
+const wavesConfig: WaveConfig[] = [
   {
-    id: 'wave1',
-    initialClassName: 'top-[70vh] left-[-50vw] w-[250vw] h-[30vh] bg-primary/30 rounded-t-full opacity-75',
-    parallaxFactor: 0.03,
-    rotateDeg: -3,
-  },
-  {
-    id: 'wave2',
-    initialClassName: 'top-[60vh] left-[-70vw] w-[300vw] h-[35vh] bg-accent/30 rounded-t-full opacity-65',
-    parallaxFactor: 0.06,
-    rotateDeg: 2,
-  },
-  {
-    id: 'wave3',
-    initialClassName: 'top-[50vh] left-[-60vw] w-[280vw] h-[40vh] bg-foreground/15 rounded-t-full opacity-55',
+    id: 'wave-svg-1',
+    gradientId: 'gradWave1',
+    // Gentle, broad wave for the background
+    pathD: "M0,192 C200,100 400,280 600,192 S1000,100 1200,192 S1400,280 1600,192 L1600,350 L0,350 Z",
+    startColor: 'hsl(215 50% 92% / 0.6)', // Light secondary
+    endColor: 'hsl(215 40% 96% / 0.3)',   // Very light secondary
+    initialTopVh: 55,
+    heightVh: 50, 
+    opacity: 0.8,
     parallaxFactor: 0.09,
-    rotateDeg: -1,
+  },
+  {
+    id: 'wave-svg-2',
+    gradientId: 'gradWave2',
+    // Mid-ground wave with more definition
+    pathD: "M0,224 C250,150 450,300 700,224 S950,150 1200,224 S1450,300 1600,224 L1600,350 L0,350 Z",
+    startColor: 'hsl(260 60% 85% / 0.65)', // Light accent (purple)
+    endColor: 'hsl(260 50% 92% / 0.35)',  // Very light accent
+    initialTopVh: 50,
+    heightVh: 55,
+    opacity: 0.9,
+    parallaxFactor: 0.06,
+  },
+  {
+    id: 'wave-svg-3',
+    gradientId: 'gradWave3',
+    // Foreground wave, most prominent
+    pathD: "M0,256 C300,180 500,320 800,256 S1100,180 1400,256 S1700,320 1900,256 L1900,350 L0,350 Z",
+    startColor: 'hsl(231 70% 80% / 0.7)', // Light primary (blue)
+    endColor: 'hsl(231 60% 90% / 0.4)',   // Very light primary
+    initialTopVh: 45,
+    heightVh: 60,
+    opacity: 1,
+    parallaxFactor: 0.03,
   },
 ];
 
@@ -42,18 +65,19 @@ export function WaveBackground() {
         if (waveEl) {
           const config = wavesConfig[index];
           const translateY = scrollY * config.parallaxFactor;
-          waveEl.style.transform = `rotate(${config.rotateDeg}deg) translateY(${translateY}px)`;
+          // Apply only translateY for parallax, rotation is handled by SVG path
+          waveEl.style.transform = `translateY(${translateY}px)`;
         }
       });
     };
-
-    waveRefs.current.forEach((waveEl, index) => {
+    
+    // Initialize positions
+    waveRefs.current.forEach((waveEl) => {
       if (waveEl) {
-        const config = wavesConfig[index];
-        waveEl.style.transform = `rotate(${config.rotateDeg}deg) translateY(0px)`;
+        waveEl.style.transform = `translateY(0px)`;
       }
     });
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -66,11 +90,30 @@ export function WaveBackground() {
         <div
           key={wave.id}
           ref={(el) => (waveRefs.current[index] = el)}
-          className={cn(
-            'absolute', 
-            wave.initialClassName
-          )}
-        />
+          className="absolute left-0 w-full"
+          style={{ 
+            top: `${wave.initialTopVh}vh`, 
+            height: `${wave.heightVh}vh`,
+            opacity: wave.opacity,
+          }}
+        >
+          <svg
+            viewBox="0 0 1600 350" // Adjusted viewBox width to match path coordinates
+            preserveAspectRatio="none"
+            className="w-full h-full"
+          >
+            <defs>
+              <linearGradient id={wave.gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style={{ stopColor: wave.startColor }} />
+                <stop offset="100%" style={{ stopColor: wave.endColor }} />
+              </linearGradient>
+            </defs>
+            <path
+              fill={`url(#${wave.gradientId})`}
+              d={wave.pathD}
+            />
+          </svg>
+        </div>
       ))}
     </div>
   );
