@@ -14,21 +14,21 @@ interface WaveProps {
 const wavesConfig: WaveProps[] = [
   {
     id: 'wave1',
-    initialClassName: 'top-[70vh] left-[-100vw] w-[300vw] h-[50vh] bg-primary/20 rounded-full',
-    parallaxFactor: 0.05,
-    rotateDeg: -8, 
+    initialClassName: 'top-[70vh] left-[-50vw] w-[250vw] h-[30vh] bg-primary/30 rounded-t-full opacity-75',
+    parallaxFactor: 0.03,
+    rotateDeg: -3,
   },
   {
     id: 'wave2',
-    initialClassName: 'top-[35vh] left-[-120vw] w-[350vw] h-[55vh] bg-accent/20 rounded-full',
-    parallaxFactor: 0.1,
-    rotateDeg: 6,  
+    initialClassName: 'top-[60vh] left-[-70vw] w-[300vw] h-[35vh] bg-accent/30 rounded-t-full opacity-65',
+    parallaxFactor: 0.06,
+    rotateDeg: 2,
   },
   {
     id: 'wave3',
-    initialClassName: 'top-[-5vh] left-[-150vw] w-[400vw] h-[60vh] bg-foreground/10 rounded-full',
-    parallaxFactor: 0.15,
-    rotateDeg: -4, 
+    initialClassName: 'top-[50vh] left-[-60vw] w-[280vw] h-[40vh] bg-foreground/15 rounded-t-full opacity-55',
+    parallaxFactor: 0.09,
+    rotateDeg: -1,
   },
 ];
 
@@ -42,13 +42,11 @@ export function WaveBackground() {
         if (waveEl) {
           const config = wavesConfig[index];
           const translateY = scrollY * config.parallaxFactor;
-          // Ensure rotation is part of the transform
           waveEl.style.transform = `rotate(${config.rotateDeg}deg) translateY(${translateY}px)`;
         }
       });
     };
 
-    // Set initial positions including rotation
     waveRefs.current.forEach((waveEl, index) => {
       if (waveEl) {
         const config = wavesConfig[index];
@@ -56,7 +54,6 @@ export function WaveBackground() {
       }
     });
     
-    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -73,7 +70,6 @@ export function WaveBackground() {
             'absolute', 
             wave.initialClassName
           )}
-          // Initial transform set in useEffect to ensure refs are populated
         />
       ))}
     </div>
