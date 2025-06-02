@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 import React from 'react';
 
 const titleText = "The Art of Visualizing Algorithms";
-const waveSpeed = 50; 
-const greenDuration = 700; 
+const waveSpeed = 50;
+const greenDuration = 700;
 
 export function HeroSection() {
   const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
@@ -43,7 +43,7 @@ export function HeroSection() {
     return () => {
       timeouts.forEach(clearTimeout);
     };
-  }, []); 
+  }, []);
 
   const renderAnimatedTitle = () => {
     const elements = [];
@@ -58,7 +58,7 @@ export function HeroSection() {
             key={`char-${i}`}
             className={cn(
               'transition-colors duration-300 ease-in-out',
-              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : '' 
+              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : ''
             )}
           >
             {char}
@@ -92,67 +92,115 @@ export function HeroSection() {
         <div className="mt-16 rounded-lg shadow-2xl mx-auto overflow-hidden" style={{ maxWidth: '800px' }}>
           <svg width="100%" height="auto" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <filter id="dropshadow" height="130%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-                <feOffset dx="2" dy="2" result="offsetblur"/>
-                <feComponentTransfer>
-                  <feFuncA type="linear" slope="0.5"/>
-                </feComponentTransfer>
-                <feMerge> 
-                  <feMergeNode/>
-                  <feMergeNode in="SourceGraphic"/> 
-                </feMerge>
-              </filter>
+                <filter id="dropshadow" height="130%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                    <feOffset dx="2" dy="2" result="offsetblur"/>
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.5"/>
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+                <style type="text/css">
+                    {`
+                        .binary-digit { fill: #8B4513; font-family: Arial, Helvetica, sans-serif; font-weight: bold; }
+                        .figure-skin-light { fill: #FFE0B2; }
+                        .figure-skin-medium { fill: #FFDBAC; }
+                        .figure-accent-brown { fill: #A0522D; }
+                        .yellow-highlight { fill: #FFFACD; }
+                        .yellow-accent { fill: #FFEE99; }
+                    `}
+                </style>
             </defs>
 
-            {/* Abstract Figure */}
-            <g transform="translate(150, 225)"> 
-              {/* Main body */}
-              <ellipse cx="0" cy="0" rx="60" ry="90" fill="#FFCC80" filter="url(#dropshadow)"/> {/* Skin tone, with shadow */}
-              {/* Head */}
-              <circle cx="0" cy="-100" r="40" fill="#FFE0B2" filter="url(#dropshadow)"/> {/* Lighter skin tone, with shadow */}
-              {/* Arm reaching - with animation */}
-              <path d="M 20 -40 Q 100 -30, 180 -60 L 200 -50 L 170 -30 Q 90 -5, 20 -10 Z" fill="#A1887F" filter="url(#dropshadow)">
-                <animateTransform attributeName="transform"
-                                  type="rotate"
-                                  values="0 20 -40; 5 20 -40; 0 20 -40" 
-                                  keyTimes="0; 0.5; 1"
-                                  dur="3s"
-                                  repeatCount="indefinite"
-                                  />
-              </path>
-              <circle cx="200" cy="-55" r="15" fill="#FFE0B2"/> {/* Hand - could also have shadow if desired */}
+            {/* Stylized Humanoid Figure Group */}
+            <g transform="translate(200, 225)" filter="url(#dropshadow)">
+                {/* Head */}
+                <circle cx="0" cy="-100" r="35" className="figure-skin-light"/>
+                <path d="M -15 -115 Q 0 -125 15 -115" stroke="#A0522D" strokeWidth="3" fill="none" opacity="0.7" /> 
+                <circle cx="-12" cy="-98" r="5" fill="#6D4C41" /> 
+                <circle cx="12" cy="-98" r="5" fill="#6D4C41" />  
+
+                {/* Torso - built from geometric shapes */}
+                <rect x="-40" y="-70" width="80" height="100" rx="20" className="figure-skin-medium"/>
+                <circle cx="0" cy="-20" r="30" className="figure-skin-light" opacity="0.6"/>
+                <path d="M -20 -50 L 0 -30 L 20 -50 Z M -10 -15 L 10 -15 L 0 5 Z" className="figure-accent-brown" opacity="0.4"/>
+                
+                {/* Arm (Reaching) - Segmented */}
+                <g id="reachingArm">
+                    <animateTransform attributeName="transform"
+                                        type="rotate"
+                                        values="0 0 -50; -8 0 -50; 0 0 -50"
+                                        keyTimes="0; 0.5; 1"
+                                        dur="3s"
+                                        repeatCount="indefinite"/>
+                    {/* Upper Arm */}
+                    <rect x="35" y="-65" width="20" height="55" rx="10" className="figure-accent-brown" transform="rotate(20 45 -60)"/>
+                    {/* Forearm */}
+                    <rect x="70" y="-95" width="18" height="65" rx="9" className="figure-skin-medium" transform="rotate(40 79 -90)"/>
+                    {/* Hand */}
+                    <circle cx="95" cy="-135" r="12" className="figure-skin-light" transform="rotate(40 79 -90)"/>
+                </g>
+
+                {/* Other Arm (Simpler) */}
+                <g transform="translate(-55, -35) rotate(-25)">
+                    <rect x="0" y="0" width="18" height="50" rx="9" className="figure-accent-brown"/>
+                    <circle cx="9" cy="55" r="10" className="figure-skin-light"/>
+                </g>
+
+                {/* Legs (Abstract and short) */}
+                <rect x="-30" y="30" width="28" height="45" rx="12" className="figure-accent-brown"/>
+                <rect x="2" y="30" width="28" height="45" rx="12" className="figure-accent-brown"/>
             </g>
 
-            {/* Binary digits - with varied opacity and some with shadows for depth */}
-            <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fill="#6D4C41"> {/* Dark brown for binary */}
-              <text x="450" y="150" fontSize="70" opacity="0.9" filter="url(#dropshadow)">0</text>
-              <text x="550" y="250" fontSize="70" opacity="0.9" filter="url(#dropshadow)">1</text>
-              <text x="650" y="120" fontSize="70" opacity="0.9" filter="url(#dropshadow)">1</text>
-              
-              <text x="400" y="100" fontSize="40" opacity="0.7">1</text>
-              <text x="480" y="300" fontSize="40" opacity="0.7">0</text>
-              <text x="580" y="80" fontSize="40" opacity="0.7">0</text>
-              <text x="700" y="320" fontSize="40" opacity="0.7">1</text>
-
-              <text x="500" y="190" fontSize="30" opacity="0.6">1</text>
-              <text x="620" y="350" fontSize="30" opacity="0.6">0</text>
-              <text x="380" y="250" fontSize="30" opacity="0.6">0</text>
-              <text x="720" y="200" fontSize="40" opacity="0.7">0</text>
-
-              {/* Lines suggesting connections or digital pathways */}
-              <line x1="420" y1="180" x2="450" y2="200" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
-              <line x1="530" y1="100" x2="560" y2="120" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
-              <line x1="600" y1="280" x2="630" y2="300" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
+            {/* Floating Binary Code */}
+            <g className="binary-digit">
+                {/* Group 1 - Near Hand */}
+                <text x="310" y="100" fontSize="40" opacity="0.95" filter="url(#dropshadow)">1</text>
+                <text x="345" y="150" fontSize="30" opacity="0.85">0</text>
+                <text x="280" y="160" fontSize="25" opacity="0.7">1</text>
+                
+                {/* General Floating Digits */}
+                <text x="450" y="70" fontSize="55" opacity="0.9" filter="url(#dropshadow)">0</text>
+                <text x="530" y="130" fontSize="45" opacity="0.85" filter="url(#dropshadow)">1</text>
+                <text x="620" y="90" fontSize="38" opacity="0.75">1</text>
+                <text x="380" y="260" fontSize="28" opacity="0.65">0</text>
+                <text x="580" y="310" fontSize="50" opacity="0.9" filter="url(#dropshadow)">1</text>
+                <text x="670" y="250" fontSize="33" opacity="0.7">0</text>
+                <text x="330" y="370" fontSize="38" opacity="0.8">1</text>
+                <text x="720" y="190" fontSize="22" opacity="0.55">0</text>
+                <text x="700" y="400" fontSize="28" opacity="0.6">1</text>
+                
+                <text x="480" y="200" fontSize="35" opacity="0.7">
+                    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3.5s" repeatCount="indefinite" />
+                    1
+                </text>
+                <text x="640" y="340" fontSize="28" opacity="0.6">
+                    <animateTransform attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="4.5s" repeatCount="indefinite" />
+                    0
+                </text>
+                <text x="400" y="190" fontSize="26" opacity="0.65">
+                    <animateTransform attributeName="transform" type="translate" values="0 0; 0 8; 0 0" dur="3s" repeatCount="indefinite" />
+                    0
+                </text>
+                 <text x="550" y="240" font-size="30" opacity="0.7" filter="url(#dropshadow)">
+                    <animateTransform attributeName="transform" type="translate" values="0 0; 5 -5; 0 0" dur="5s" repeatCount="indefinite" />
+                    1
+                </text>
             </g>
-            
-            {/* Decorative background elements */}
-            <circle cx="100" cy="80" r="30" fill="#FFF59D" opacity="0.4"/> {/* Light yellow */}
-            <ellipse cx="700" cy="380" rx="50" ry="25" fill="#FFF59D" opacity="0.4"/>
+
+            {/* Decorative Accent Elements (Light Yellow & accents) */}
+            <circle cx="100" cy="70" r="25" className="yellow-highlight" opacity="0.4"/>
+            <ellipse cx="720" cy="390" rx="45" ry="22" className="yellow-highlight" opacity="0.4"/>
+            <path d="M 60 120 Q 110 90 160 120 T 260 120" stroke="#FFEE99" stroke-width="3" fill="none" opacity="0.35"/>
+            <path d="M 580 40 Q 615 75 580 110 Q 545 75 580 40 Z" className="yellow-accent" opacity="0.25"/>
+             <rect x="30" y="300" width="50" height="50" rx="10" className="yellow-highlight" opacity="0.2" transform="rotate(-15 55 325)"/>
+             <circle cx="750" cy="80" r="15" className="yellow-accent" opacity="0.3"/>
           </svg>
         </div>
       </div>
     </section>
   );
 }
-
