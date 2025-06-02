@@ -20,14 +20,14 @@ const AnimationNode: React.FC<AnimationNodeProps> = ({ text, isVisible, isLast }
           : 'opacity-0 transform md:-translate-x-10 translate-y-10 md:translate-y-0'
       )}
     >
-      <div className="bg-primary text-primary-foreground p-4 md:p-6 rounded-lg shadow-xl text-center min-w-[150px] md:min-w-[200px] max-w-[200px] md:max-w-none">
+      <div className="bg-slate-200 text-slate-800 p-4 md:p-6 rounded-lg shadow-xl text-center min-w-[150px] md:min-w-[200px] max-w-[200px] md:max-w-none">
         <p className="text-sm md:text-lg font-semibold">{text}</p>
       </div>
       {!isLast && (
-        <div className="hidden md:block w-8 md:w-12 h-1 bg-primary mx-2 md:mx-4"></div>
+        <div className="hidden md:block w-8 md:w-12 h-1 bg-slate-200 mx-2 md:mx-4"></div>
       )}
       {!isLast && (
-         <div className="block md:hidden w-1 h-8 bg-primary my-2 md:my-0"></div>
+         <div className="block md:hidden w-1 h-8 bg-slate-200 my-2 md:my-0"></div>
       )}
     </div>
   );
@@ -87,7 +87,7 @@ export function AnimationOverlay({ onAnimationComplete }: AnimationOverlayProps)
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[9999] bg-gray-900 flex items-center overflow-hidden',
+        'fixed inset-0 z-[9999] bg-black flex items-center overflow-hidden',
         fadeOutOverlay ? 'opacity-0 pointer-events-none' : 'opacity-100',
         'transition-opacity duration-1000 ease-in-out'
       )}
