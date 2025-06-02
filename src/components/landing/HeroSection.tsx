@@ -134,7 +134,7 @@ export function HeroSection() {
               <PlayCircle className="mr-2 h-5 w-5" /> Get Started
             </Link>
           </Button>
-          <div className="p-[1.5px] rounded-lg bg-gradient-to-br from-purple-500 via-indigo-500 to-violet-600 shadow-lg shadow-accent/50 hover:shadow-xl hover:shadow-accent/70 transition-all duration-300 transform hover:scale-105">
+          <div className="p-[1.5px] rounded-lg bg-gradient-to-br from-purple-400 via-fuchsia-500 to-indigo-600 shadow-[0_0_15px_2px] shadow-purple-500/50 hover:shadow-[0_0_20px_5px] hover:shadow-purple-500/70 transition-all duration-300">
             <Button
               size="lg"
               asChild
