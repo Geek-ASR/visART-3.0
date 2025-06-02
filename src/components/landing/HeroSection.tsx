@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -8,10 +9,10 @@ export function HeroSection() {
     <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30 rounded-lg shadow-lg">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold font-headline mb-6 text-primary">
-          Master DSA the Interactive Way
+          The Art of Visualizing Algorithms
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-          Learn, Visualize, and Code Data Structures and Algorithms like never before. AlgoVisuals provides an engaging platform to build a strong foundation and excel in problem-solving.
+          Visualize, learn, and code Data Structures and Algorithms like never before. VisART provides various features to enhance your logic-building skills and excel in problem-solving.
         </p>
         <div className="space-x-4">
           <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
