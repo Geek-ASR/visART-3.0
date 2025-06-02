@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,24 +9,24 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 94.1%; /* Light Gray #F0F0F0 */
-    --foreground: 0 0% 20%; /* Dark Gray for contrast on light gray */
-    --card: 0 0% 100%;
+    --background: 215 30% 96%; /* Slight Greyish Light Blue #F3F6FA */
+    --foreground: 0 0% 20%; /* Dark Gray for contrast */
+    --card: 215 25% 98%; /* Very Light Greyish Blue #F7F9FC */
     --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
+    --popover: 215 25% 98%; /* Very Light Greyish Blue #F7F9FC */
     --popover-foreground: 0 0% 3.9%;
     --primary: 231 48% 48%; /* Dark Blue #3F51B5 */
     --primary-foreground: 0 0% 98%; /* Light color for contrast on dark blue */
-    --secondary: 0 0% 90%; /* Slightly darker than background for secondary elements */
+    --secondary: 215 25% 92%; /* Greyish Light Blue #EAF0F7 */
     --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 85%; /* Muted color */
+    --muted: 215 20% 88%; /* Muted Greyish Blue #DDE6F2 */
     --muted-foreground: 0 0% 45.1%;
     --accent: 260 42% 55%; /* Purple #7E57C2 */
     --accent-foreground: 0 0% 98%; /* Light color for contrast on purple */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
+    --border: 215 20% 85%; /* Greyish Blue Border #D5E0EE */
+    --input: 215 20% 85%; /* Greyish Blue Input #D5E0EE */
     --ring: 231 48% 48%; /* Use primary color for ring */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -34,15 +35,15 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    /* Sidebar specific colors, can mirror main theme or be distinct */
-    --sidebar-background: 0 0% 94.1%; /* Match main background */
-    --sidebar-foreground: 0 0% 20%;   /* Match main foreground */
-    --sidebar-primary: 231 48% 48%;   /* Match main primary */
+    /* Sidebar specific colors, reflecting the new theme */
+    --sidebar-background: 215 30% 96%;   /* Match main background */
+    --sidebar-foreground: 0 0% 20%;     /* Match main foreground */
+    --sidebar-primary: 231 48% 48%;     /* Match main primary */
     --sidebar-primary-foreground: 0 0% 98%; /* Match main primary-foreground */
-    --sidebar-accent: 260 42% 55%;    /* Match main accent */
+    --sidebar-accent: 260 42% 55%;      /* Match main accent */
     --sidebar-accent-foreground: 0 0% 98%; /* Match main accent-foreground */
-    --sidebar-border: 0 0% 85%;       /* Slightly darker border for sidebar */
-    --sidebar-ring: 231 48% 48%;      /* Match main ring */
+    --sidebar-border: 215 20% 85%;       /* Match main border */
+    --sidebar-ring: 231 48% 48%;        /* Match main ring */
   }
   .dark {
     --background: 0 0% 3.9%;
