@@ -4,14 +4,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import { PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
 const titleText = "The Art of Visualizing Algorithms";
-const waveSpeed = 50; // ms per character (decreased from 75 for faster wave)
-const greenDuration = 700; // ms each char stays green (increased from 500 for wider wave)
+const waveSpeed = 50; 
+const greenDuration = 700; 
 
 export function HeroSection() {
   const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
@@ -20,7 +19,6 @@ export function HeroSection() {
   useEffect(() => {
     const timeouts: NodeJS.Timeout[] = [];
     actualCharsToAnimate.forEach((_, index) => {
-      // Timeout to turn character green
       timeouts.push(
         setTimeout(() => {
           setAnimatedCharsState((prev) => {
@@ -31,7 +29,6 @@ export function HeroSection() {
         }, index * waveSpeed)
       );
 
-      // Timeout to revert character to original color
       timeouts.push(
         setTimeout(() => {
           setAnimatedCharsState((prev) => {
@@ -46,7 +43,7 @@ export function HeroSection() {
     return () => {
       timeouts.forEach(clearTimeout);
     };
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []); 
 
   const renderAnimatedTitle = () => {
     const elements = [];
@@ -61,7 +58,7 @@ export function HeroSection() {
             key={`char-${i}`}
             className={cn(
               'transition-colors duration-300 ease-in-out',
-              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : '' // Empty string for color reverts to parent color
+              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : '' 
             )}
           >
             {char}
@@ -92,15 +89,60 @@ export function HeroSection() {
             <Link href="/visualizer">Explore All Features</Link>
           </Button>
         </div>
-        <div className="mt-16">
-          <Image
-            src="https://placehold.co/800x450.png"
-            alt="Interactive DSA Learning Platform"
-            width={800}
-            height={450}
-            className="rounded-lg shadow-2xl mx-auto"
-            data-ai-hint="abstract data visualization"
-          />
+        <div className="mt-16 rounded-lg shadow-2xl mx-auto overflow-hidden" style={{ maxWidth: '800px' }}>
+          <svg width="100%" height="auto" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="dropshadow" height="130%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="2" dy="2" result="offsetblur"/>
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.5"/>
+                </feComponentTransfer>
+                <feMerge> 
+                  <feMergeNode/>
+                  <feMergeNode in="SourceGraphic"/> 
+                </feMerge>
+              </filter>
+            </defs>
+
+            <rect width="100%" height="100%" fill="#FFFDE7" />
+
+            <g transform="translate(150, 225)"> 
+              <ellipse cx="0" cy="0" rx="60" ry="90" fill="#FFCC80" filter="url(#dropshadow)"/>
+              <circle cx="0" cy="-100" r="40" fill="#FFE0B2" filter="url(#dropshadow)"/>
+              <path d="M 20 -40 Q 100 -30, 180 -60 L 200 -50 L 170 -30 Q 90 -5, 20 -10 Z" fill="#A1887F" filter="url(#dropshadow)">
+                <animateTransform attributeName="transform"
+                                  type="rotate"
+                                  values="0 20 -40; 5 20 -40; 0 20 -40"
+                                  keyTimes="0; 0.5; 1"
+                                  dur="3s"
+                                  repeatCount="indefinite"
+                                  />
+              </path>
+              <circle cx="200" cy="-55" r="15" fill="#FFE0B2"/>
+            </g>
+
+            <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fill="#6D4C41">
+              <text x="450" y="150" fontSize="70" opacity="0.9">0</text>
+              <text x="550" y="250" fontSize="70" opacity="0.9">1</text>
+              <text x="650" y="120" fontSize="70" opacity="0.9">1</text>
+              <text x="400" y="100" fontSize="40" opacity="0.7">1</text>
+              <text x="480" y="300" fontSize="40" opacity="0.7">0</text>
+              <text x="580" y="80" fontSize="40" opacity="0.7">0</text>
+              <text x="700" y="320" fontSize="40" opacity="0.7">1</text>
+              <text x="500" y="190" fontSize="30" opacity="0.6">1</text>
+              <text x="620" y="350" fontSize="30" opacity="0.6">0</text>
+              <text x="380" y="250" fontSize="30" opacity="0.6">0</text>
+              <text x="720" y="200" fontSize="40" opacity="0.7">0</text>
+
+              <line x1="420" y1="180" x2="450" y2="200" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
+              <line x1="530" y1="100" x2="560" y2="120" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
+              <line x1="600" y1="280" x2="630" y2="300" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
+            </g>
+            
+            <circle cx="100" cy="80" r="30" fill="#FFF59D" opacity="0.4"/>
+            <ellipse cx="700" cy="380" rx="50" ry="25" fill="#FFF59D" opacity="0.4"/>
+          </svg>
         </div>
       </div>
     </section>
