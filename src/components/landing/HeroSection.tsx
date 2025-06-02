@@ -105,42 +105,51 @@ export function HeroSection() {
               </filter>
             </defs>
 
-            <rect width="100%" height="100%" fill="#FFFDE7" />
+            <rect width="100%" height="100%" fill="#FFFDE7" /> {/* Light cream background for the SVG canvas */}
 
+            {/* Abstract Figure */}
             <g transform="translate(150, 225)"> 
-              <ellipse cx="0" cy="0" rx="60" ry="90" fill="#FFCC80" filter="url(#dropshadow)"/>
-              <circle cx="0" cy="-100" r="40" fill="#FFE0B2" filter="url(#dropshadow)"/>
+              {/* Main body */}
+              <ellipse cx="0" cy="0" rx="60" ry="90" fill="#FFCC80" filter="url(#dropshadow)"/> {/* Skin tone, with shadow */}
+              {/* Head */}
+              <circle cx="0" cy="-100" r="40" fill="#FFE0B2" filter="url(#dropshadow)"/> {/* Lighter skin tone, with shadow */}
+              {/* Arm reaching - with animation */}
               <path d="M 20 -40 Q 100 -30, 180 -60 L 200 -50 L 170 -30 Q 90 -5, 20 -10 Z" fill="#A1887F" filter="url(#dropshadow)">
                 <animateTransform attributeName="transform"
                                   type="rotate"
-                                  values="0 20 -40; 5 20 -40; 0 20 -40"
+                                  values="0 20 -40; 5 20 -40; 0 20 -40" 
                                   keyTimes="0; 0.5; 1"
                                   dur="3s"
                                   repeatCount="indefinite"
                                   />
               </path>
-              <circle cx="200" cy="-55" r="15" fill="#FFE0B2"/>
+              <circle cx="200" cy="-55" r="15" fill="#FFE0B2"/> {/* Hand - could also have shadow if desired */}
             </g>
 
-            <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fill="#6D4C41">
-              <text x="450" y="150" fontSize="70" opacity="0.9">0</text>
-              <text x="550" y="250" fontSize="70" opacity="0.9">1</text>
-              <text x="650" y="120" fontSize="70" opacity="0.9">1</text>
+            {/* Binary digits - with varied opacity and some with shadows for depth */}
+            <g fontFamily="Arial, Helvetica, sans-serif" fontWeight="bold" fill="#6D4C41"> {/* Dark brown for binary */}
+              <text x="450" y="150" fontSize="70" opacity="0.9" filter="url(#dropshadow)">0</text>
+              <text x="550" y="250" fontSize="70" opacity="0.9" filter="url(#dropshadow)">1</text>
+              <text x="650" y="120" fontSize="70" opacity="0.9" filter="url(#dropshadow)">1</text>
+              
               <text x="400" y="100" fontSize="40" opacity="0.7">1</text>
               <text x="480" y="300" fontSize="40" opacity="0.7">0</text>
               <text x="580" y="80" fontSize="40" opacity="0.7">0</text>
               <text x="700" y="320" fontSize="40" opacity="0.7">1</text>
+
               <text x="500" y="190" fontSize="30" opacity="0.6">1</text>
               <text x="620" y="350" fontSize="30" opacity="0.6">0</text>
               <text x="380" y="250" fontSize="30" opacity="0.6">0</text>
               <text x="720" y="200" fontSize="40" opacity="0.7">0</text>
 
+              {/* Lines suggesting connections or digital pathways */}
               <line x1="420" y1="180" x2="450" y2="200" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
               <line x1="530" y1="100" x2="560" y2="120" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
               <line x1="600" y1="280" x2="630" y2="300" stroke="#BCAAA4" strokeWidth="3" opacity="0.5"/>
             </g>
             
-            <circle cx="100" cy="80" r="30" fill="#FFF59D" opacity="0.4"/>
+            {/* Decorative background elements */}
+            <circle cx="100" cy="80" r="30" fill="#FFF59D" opacity="0.4"/> {/* Light yellow */}
             <ellipse cx="700" cy="380" rx="50" ry="25" fill="#FFF59D" opacity="0.4"/>
           </svg>
         </div>
@@ -148,3 +157,4 @@ export function HeroSection() {
     </section>
   );
 }
+
