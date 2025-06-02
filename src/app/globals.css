@@ -87,6 +87,7 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Removed bg-background here, it's now on an inner wrapper in layout.tsx */
+    @apply text-foreground;
   }
 }
