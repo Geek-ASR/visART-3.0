@@ -31,7 +31,7 @@ export function FeaturesSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
+            <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card/60 backdrop-blur-sm">
               <CardHeader className="items-center text-center">
                 {feature.icon}
                 <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
