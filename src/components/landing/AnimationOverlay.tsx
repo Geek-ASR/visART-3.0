@@ -14,7 +14,7 @@ const AnimationNode: React.FC<AnimationNodeProps> = ({ text, isVisible, isLast }
   return (
     <div
       className={cn(
-        'flex flex-col md:flex-row items-center transition-all duration-500 ease-out', // Faster node animation
+        'flex flex-col md:flex-row items-center transition-all duration-500 ease-out',
         isVisible
           ? 'opacity-100 transform md:translate-x-0 translate-y-0'
           : 'opacity-0 transform md:-translate-x-10 translate-y-10 md:translate-y-0'
@@ -22,12 +22,6 @@ const AnimationNode: React.FC<AnimationNodeProps> = ({ text, isVisible, isLast }
     >
       <div className="relative bg-slate-200 text-slate-800 p-4 md:p-6 rounded-lg shadow-xl text-center min-w-[150px] md:min-w-[200px] max-w-[200px] md:max-w-none">
         <p className="text-sm md:text-lg font-semibold">{text}</p>
-        {isVisible && (
-          <div
-            className="sparkle absolute -top-2 -right-2 w-5 h-5 bg-yellow-400 rounded-full shadow-lg"
-            style={{ animationDelay: '0.1s' }} // Slight delay so node appears first
-          />
-        )}
       </div>
       {!isLast && (
         <>
@@ -69,20 +63,20 @@ export function AnimationOverlay({ onAnimationComplete }: AnimationOverlayProps)
             newVisibleNodes[index] = true;
             return newVisibleNodes;
           });
-        }, index * 600) // Faster stagger delay
+        }, index * 600) 
       );
     });
 
     timeouts.push(
       setTimeout(() => {
         setFadeOutOverlay(true);
-      }, nodesContent.length * 600 + 500) // Adjusted delay based on faster stagger and node animation
+      }, nodesContent.length * 600 + 500) 
     );
     
     timeouts.push(
       setTimeout(() => {
         onAnimationComplete();
-      }, nodesContent.length * 600 + 500 + 500) // Adjusted delay for fade out (500ms)
+      }, nodesContent.length * 600 + 500 + 500) 
     );
 
     return () => {
@@ -95,7 +89,7 @@ export function AnimationOverlay({ onAnimationComplete }: AnimationOverlayProps)
       className={cn(
         'fixed inset-0 z-[9999] bg-black flex items-center overflow-hidden',
         fadeOutOverlay ? 'opacity-0 pointer-events-none' : 'opacity-100',
-        'transition-opacity duration-500 ease-in-out' // Faster fade-out duration
+        'transition-opacity duration-500 ease-in-out'
       )}
     >
       <div className="w-full flex justify-start items-center pl-4 sm:pl-6 md:pl-8 lg:pl-10">
