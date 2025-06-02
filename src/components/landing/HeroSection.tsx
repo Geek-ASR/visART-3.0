@@ -7,24 +7,26 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { PlayCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import React from 'react';
 
 const titleText = "The Art of Visualizing Algorithms";
-const titleChars = titleText.split('');
 
 export function HeroSection() {
-  const [animatedChars, setAnimatedChars] = useState(Array(titleChars.length).fill(false));
+  // Create an array of only the non-space characters for animation state
+  const actualCharsToAnimate = titleText.split('').filter(char => char !== ' ');
+  const [animatedCharsState, setAnimatedCharsState] = useState(Array(actualCharsToAnimate.length).fill(false));
 
   useEffect(() => {
     const timeouts: NodeJS.Timeout[] = [];
-    titleChars.forEach((_, index) => {
+    actualCharsToAnimate.forEach((_, index) => {
       timeouts.push(
         setTimeout(() => {
-          setAnimatedChars((prev) => {
+          setAnimatedCharsState((prev) => {
             const newAnimatedChars = [...prev];
-            newAnimatedChars[index] = true;
+            newAnimatedChars[index] = true; // Animate non-space characters
             return newAnimatedChars;
           });
-        }, index * 75) // Adjust timing for wave speed (75ms per character)
+        }, index * 75) // Wave speed for each non-space character
       );
     });
 
@@ -33,21 +35,38 @@ export function HeroSection() {
     };
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
+  const renderAnimatedTitle = () => {
+    const elements = [];
+    let nonSpaceCharIndex = 0;
+    for (let i = 0; i < titleText.length; i++) {
+      const char = titleText[i];
+      if (char === ' ') {
+        // Render spaces as React Fragments containing a space string
+        elements.push(<React.Fragment key={`space-${i}`}> </React.Fragment>);
+      } else {
+        // Render non-space characters within spans for animation
+        elements.push(
+          <span
+            key={`char-${i}`}
+            className={cn(
+              'transition-colors duration-300 ease-in-out',
+              animatedCharsState[nonSpaceCharIndex] ? 'text-green-400' : ''
+            )}
+          >
+            {char}
+          </span>
+        );
+        nonSpaceCharIndex++;
+      }
+    }
+    return elements;
+  };
+
   return (
     <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary/30 rounded-lg shadow-lg">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-6xl font-bold font-headline mb-6 text-primary">
-          {titleChars.map((char, index) => (
-            <span
-              key={index}
-              className={cn(
-                'transition-colors duration-300 ease-in-out',
-                animatedChars[index] ? 'text-green-400' : '' // Inherits text-primary if not animated
-              )}
-            >
-              {char === ' ' ? '\u00A0' : char} {/* Ensures spaces are rendered correctly */}
-            </span>
-          ))}
+          {renderAnimatedTitle()}
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
           Visualize, learn, and code Data Structures and Algorithms like never before. VisART provides various features to enhance your logic-building skills and excel in problem-solving.
