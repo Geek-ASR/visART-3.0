@@ -14,21 +14,21 @@ interface WaveProps {
 const wavesConfig: WaveProps[] = [
   {
     id: 'wave1',
-    initialClassName: 'top-[-80vh] left-[-50vw] w-[200vw] h-[200vh] bg-primary/20',
+    initialClassName: 'top-[70vh] left-[-100vw] w-[300vw] h-[50vh] bg-primary/20 rounded-full',
     parallaxFactor: 0.05,
-    rotateDeg: -15, // Was -40
+    rotateDeg: -8, 
   },
   {
     id: 'wave2',
-    initialClassName: 'bottom-[-70vh] right-[-60vw] w-[220vw] h-[180vh] bg-accent/20',
+    initialClassName: 'top-[35vh] left-[-120vw] w-[350vw] h-[55vh] bg-accent/20 rounded-full',
     parallaxFactor: 0.1,
-    rotateDeg: 10,  // Was 30
+    rotateDeg: 6,  
   },
   {
     id: 'wave3',
-    initialClassName: 'top-[0vh] left-[-70vw] w-[250vw] h-[150vh] bg-foreground/10',
+    initialClassName: 'top-[-5vh] left-[-150vw] w-[400vw] h-[60vh] bg-foreground/10 rounded-full',
     parallaxFactor: 0.15,
-    rotateDeg: -20, // Was -55
+    rotateDeg: -4, 
   },
 ];
 
@@ -42,14 +42,21 @@ export function WaveBackground() {
         if (waveEl) {
           const config = wavesConfig[index];
           const translateY = scrollY * config.parallaxFactor;
+          // Ensure rotation is part of the transform
           waveEl.style.transform = `rotate(${config.rotateDeg}deg) translateY(${translateY}px)`;
         }
       });
     };
 
-    // Set initial positions
-    handleScroll();
-
+    // Set initial positions including rotation
+    waveRefs.current.forEach((waveEl, index) => {
+      if (waveEl) {
+        const config = wavesConfig[index];
+        waveEl.style.transform = `rotate(${config.rotateDeg}deg) translateY(0px)`;
+      }
+    });
+    
+    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -63,15 +70,12 @@ export function WaveBackground() {
           key={wave.id}
           ref={(el) => (waveRefs.current[index] = el)}
           className={cn(
-            'absolute rounded-full', 
+            'absolute', 
             wave.initialClassName
           )}
-          style={{
-            transform: `rotate(${wavesConfig[index].rotateDeg}deg) translateY(0px)`, // Use config from map for initial
-          }}
+          // Initial transform set in useEffect to ensure refs are populated
         />
       ))}
     </div>
   );
 }
-
