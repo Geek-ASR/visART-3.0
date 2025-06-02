@@ -27,34 +27,8 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24 bg-background">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-0"
-      >
-        <div
-          className="absolute top-[-30%] left-[-40%]
-                     w-[200%] h-[160%]
-                     bg-secondary/30 
-                     transform rotate-[-20deg]
-                     rounded-full"
-        />
-        <div
-          className="absolute top-[-35%] left-[-30%]
-                     w-[200%] h-[170%]
-                     bg-primary/15 
-                     transform rotate-[-25deg]
-                     rounded-full opacity-80"
-        />
-        <div
-          className="absolute top-[-20%] left-[-50%]
-                     w-[220%] h-[150%]
-                     bg-accent/10 
-                     transform rotate-[-15deg]
-                     rounded-full opacity-70"
-        />
-      </div>
-      <div className="relative container mx-auto px-4 z-[1]">
+    <section className="py-16 md:py-24 bg-transparent">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">

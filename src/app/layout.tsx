@@ -22,6 +22,29 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen" suppressHydrationWarning={true}>
+        <div aria-hidden="true" className="fixed inset-0 z-[-1] overflow-hidden">
+          <div
+            className="absolute rounded-full transform
+                       top-[-80vh] left-[-50vw]
+                       w-[200vw] h-[200vh]
+                       bg-secondary/10
+                       rotate-[-40deg]"
+          />
+          <div
+            className="absolute rounded-full transform
+                       bottom-[-70vh] right-[-60vw]
+                       w-[220vw] h-[180vh]
+                       bg-primary/05
+                       rotate-[30deg]"
+          />
+          <div
+            className="absolute rounded-full transform
+                       top-[0vh] left-[-70vw]
+                       w-[250vw] h-[150vh]
+                       bg-accent/05
+                       rotate-[-55deg]"
+          />
+        </div>
         <Navbar />
         <main className="flex-grow container mx-auto px-4 py-8">
           {children}
