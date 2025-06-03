@@ -69,21 +69,21 @@ export function AuthForm() {
     console.log('Sign Up Data:', data);
     // TODO: Implement Firebase Sign Up
     toast({ title: 'Sign Up Attempted', description: 'Check console for data. (Not implemented)' });
-    // Optionally navigate after sign up too, e.g., router.push('/');
+    // Optionally navigate after sign up too, e.g., router.push('/dashboard');
   };
 
   const onSignInSubmit = (data: SignInFormValues) => {
     console.log('Sign In Data:', data);
     // TODO: Implement Firebase Sign In
-    toast({ title: 'Sign In Successful (Mock)', description: 'Redirecting to homepage...' });
-    router.push('/');
+    toast({ title: 'Sign In Successful (Mock)', description: 'Redirecting to dashboard...' });
+    router.push('/dashboard');
   };
   
   const handleGoogleAuth = (mode: 'signin' | 'signup') => {
     console.log(`Google ${mode} action`);
     // TODO: Implement Firebase Google Sign In/Up
-    toast({ title: `Google ${mode === 'signin' ? 'Sign In' : 'Sign Up'} (Mock)`, description: 'Redirecting to homepage...' });
-    router.push('/'); // Also navigate on Google sign-in/up for mock purposes
+    toast({ title: `Google ${mode === 'signin' ? 'Sign In' : 'Sign Up'} (Mock)`, description: 'Redirecting to dashboard...' });
+    router.push('/dashboard'); 
   }
 
   return (
