@@ -88,13 +88,13 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <Button variant="ghost" className="w-full justify-start text-left hover:bg-muted/50" asChild>
-                <Link href="/#features">Review Features</Link> 
+                <Link href="/#features">Review Features</Link>
             </Button>
             <Button variant="ghost" className="w-full justify-start text-left hover:bg-muted/50" asChild>
-                <Link href="/community">Join Community</Link> {/* Placeholder for community page */}
+                <Link href="/community">Join Community</Link>
             </Button>
              <Button variant="ghost" className="w-full justify-start text-left hover:bg-muted/50" asChild>
-                <Link href="/feedback">Provide Feedback</Link> {/* Placeholder for feedback page */}
+                <Link href="/feedback">Provide Feedback</Link>
             </Button>
           </CardContent>
         </Card>
