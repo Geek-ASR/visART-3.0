@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -50,17 +50,52 @@ const courses = [
 export default function DashboardPage() {
   const learningScrollContainerRef = useRef<HTMLDivElement>(null);
   const courseScrollContainerRef = useRef<HTMLDivElement>(null); 
+  const [activeLearningDotIndex, setActiveLearningDotIndex] = useState(0);
+  const learningItemEffectiveWidth = 300 + 16; // card min-width (300px) + space-x-4 gap (1rem = 16px)
+
 
   const scrollLearningTopics = (direction: 'left' | 'right') => {
-    if (learningScrollContainerRef.current) {
-      const scrollAmount = 320; // Approx width of one card + gap
-      learningScrollContainerRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
+    if (!learningScrollContainerRef.current || learningTopics.length === 0) return;
+
+    let newIndex;
+    if (direction === 'left') {
+      newIndex = Math.max(activeLearningDotIndex - 1, 0);
+    } else {
+      newIndex = Math.min(activeLearningDotIndex + 1, learningTopics.length - 1);
+    }
+
+    if (newIndex !== activeLearningDotIndex) {
+        learningScrollContainerRef.current.scrollTo({
+            left: newIndex * learningItemEffectiveWidth,
+            behavior: 'smooth',
+        });
+        setActiveLearningDotIndex(newIndex);
     }
   };
   
+  useEffect(() => {
+    const container = learningScrollContainerRef.current;
+    if (!container || learningTopics.length === 0) return;
+
+    let scrollTimeout: NodeJS.Timeout;
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      const currentScrollLeft = container.scrollLeft;
+      scrollTimeout = setTimeout(() => {
+        const newIndex = Math.round(currentScrollLeft / learningItemEffectiveWidth);
+        const clampedIndex = Math.max(0, Math.min(newIndex, learningTopics.length - 1));
+        setActiveLearningDotIndex(clampedIndex);
+      }, 150); // Debounce time
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(scrollTimeout);
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [learningTopics.length, learningItemEffectiveWidth]);
+
+
   const scrollCourses = (direction: 'left' | 'right') => {
     if (courseScrollContainerRef.current) {
       const scrollAmount = 320; 
@@ -78,14 +113,16 @@ export default function DashboardPage() {
       <section>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-foreground">Continue Learning</h2>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('left')}>
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('right')}>
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
+          {learningTopics.length > 0 && (
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('left')}>
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('right')}>
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
         </div>
         <ClientOnly>
           <div ref={learningScrollContainerRef} className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
@@ -107,11 +144,16 @@ export default function DashboardPage() {
               </Card>
             ))}
           </div>
-          <div className="flex justify-center space-x-1.5 mt-4">
-              {Array(learningTopics.length).fill(0).map((_, i) => (
-                  <div key={i} className={`h-1.5 w-1.5 rounded-full ${i === 0 ? 'bg-primary' : 'bg-muted-foreground/50'}`}></div>
-              ))}
-          </div>
+          {learningTopics.length > 0 && (
+            <div className="flex justify-center space-x-1.5 mt-4">
+                {learningTopics.map((_, i) => (
+                    <div 
+                      key={i} 
+                      className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${i === activeLearningDotIndex ? 'bg-primary scale-125' : 'bg-muted-foreground/50'}`}
+                    />
+                ))}
+            </div>
+          )}
         </ClientOnly>
       </section>
 
@@ -136,8 +178,8 @@ export default function DashboardPage() {
                   <Image 
                       src={course.image} 
                       alt={course.title} 
-                      layout="fill" 
-                      objectFit="cover"
+                      fill // Changed from layout="fill" to fill
+                      style={{objectFit: 'cover'}} // Changed from objectFit="cover"
                       data-ai-hint={course.aiHint}
                   />
                 </div>
