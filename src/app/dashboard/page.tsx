@@ -48,7 +48,7 @@ const courses = [
 
 export default function DashboardPage() {
   const learningScrollContainerRef = useRef<HTMLDivElement>(null);
-  const courseScrollContainerRef = useRef<HTMLDivElement>(null); // Added for consistency, though not yet used for courses
+  const courseScrollContainerRef = useRef<HTMLDivElement>(null); 
 
   const scrollLearningTopics = (direction: 'left' | 'right') => {
     if (learningScrollContainerRef.current) {
@@ -60,7 +60,6 @@ export default function DashboardPage() {
     }
   };
   
-  // Placeholder scroll function for courses if needed later
   const scrollCourses = (direction: 'left' | 'right') => {
     if (courseScrollContainerRef.current) {
       const scrollAmount = 320; 
@@ -100,7 +99,7 @@ export default function DashboardPage() {
                   <Button variant="secondary" size="sm">Read Theory</Button>
                   <Button variant="secondary" size="sm">Visualize</Button>
                   <Button variant="secondary" size="sm">Start Quiz</Button>
-                  <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90">Start Challenge</Button>
+                  <Button variant="secondary" size="sm">Start Challenge</Button>
                 </div>
               </CardContent>
             </Card>
