@@ -12,7 +12,7 @@ export function ContributorSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Text Content */}
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary text-center">
               Be a Contributor
             </h2>
             <p className="text-lg text-muted-foreground text-left">
