@@ -101,7 +101,7 @@ export function AuthForm() {
           <form onSubmit={signUpForm.handleSubmit(onSignUpSubmit)}>
             <CardContent className="space-y-4">
               <div className="space-y-1">
-                <Label htmlFor="signup-name">Name (Optional)</Label>
+                <Label htmlFor="signup-name">Name</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input id="signup-name" {...signUpForm.register('name')} placeholder="John Doe" className="pl-10" />
