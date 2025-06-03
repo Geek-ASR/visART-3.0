@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ClientOnly } from '@/components/layout/ClientOnly';
 
 // Sample Data
 const learningTopics = [
@@ -86,30 +87,32 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-        <div ref={learningScrollContainerRef} className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
-          {learningTopics.map((topic) => (
-            <Card key={topic.id} className="min-w-[300px] bg-card shadow-md">
-              <CardHeader>
-                <CardTitle className="text-lg">{topic.title}</CardTitle>
-                <CardDescription>{topic.exercises} exercises</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Progress value={topic.progress} aria-label={`${topic.title} progress ${topic.progress}%`} />
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <Button variant="outline" size="sm">Read Theory</Button>
-                  <Button variant="outline" size="sm">Visualize</Button>
-                  <Button variant="outline" size="sm">Start Quiz</Button>
-                  <Button variant="outline" size="sm">Start Challenge</Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="flex justify-center space-x-1.5 mt-4">
-            {Array(learningTopics.length).fill(0).map((_, i) => (
-                <div key={i} className={`h-1.5 w-1.5 rounded-full ${i === 0 ? 'bg-primary' : 'bg-muted-foreground/50'}`}></div>
+        <ClientOnly>
+          <div ref={learningScrollContainerRef} className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
+            {learningTopics.map((topic) => (
+              <Card key={topic.id} className="min-w-[300px] bg-card shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-lg">{topic.title}</CardTitle>
+                  <CardDescription>{topic.exercises} exercises</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <Progress value={topic.progress} aria-label={`${topic.title} progress ${topic.progress}%`} />
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <Button variant="outline" size="sm">Read Theory</Button>
+                    <Button variant="outline" size="sm">Visualize</Button>
+                    <Button variant="outline" size="sm">Start Quiz</Button>
+                    <Button variant="outline" size="sm">Start Challenge</Button>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
-        </div>
+          </div>
+          <div className="flex justify-center space-x-1.5 mt-4">
+              {Array(learningTopics.length).fill(0).map((_, i) => (
+                  <div key={i} className={`h-1.5 w-1.5 rounded-full ${i === 0 ? 'bg-primary' : 'bg-muted-foreground/50'}`}></div>
+              ))}
+          </div>
+        </ClientOnly>
       </section>
 
       {/* Continue Course Section */}
@@ -125,33 +128,35 @@ export default function DashboardPage() {
             </Button>
           </div>
         </div>
-        <div ref={courseScrollContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <Card key={course.id} className="bg-card shadow-md overflow-hidden">
-              <div className="relative h-40 w-full">
-                <Image 
-                    src={course.image} 
-                    alt={course.title} 
-                    layout="fill" 
-                    objectFit="cover"
-                    data-ai-hint={course.aiHint}
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-lg">{course.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <CardDescription className="text-xs h-16 overflow-hidden text-ellipsis">
-                  {course.description}
-                </CardDescription>
-                <Progress value={course.progress} aria-label={`${course.title} progress ${course.progress}%`} />
-              </CardContent>
-               <CardFooter>
-                 <Button variant="link" className="px-0 text-primary hover:text-primary/80 text-sm">View Course</Button>
-               </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <ClientOnly>
+          <div ref={courseScrollContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {courses.map((course) => (
+              <Card key={course.id} className="bg-card shadow-md overflow-hidden">
+                <div className="relative h-40 w-full">
+                  <Image 
+                      src={course.image} 
+                      alt={course.title} 
+                      layout="fill" 
+                      objectFit="cover"
+                      data-ai-hint={course.aiHint}
+                  />
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg">{course.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <CardDescription className="text-xs h-16 overflow-hidden text-ellipsis">
+                    {course.description}
+                  </CardDescription>
+                  <Progress value={course.progress} aria-label={`${course.title} progress ${course.progress}%`} />
+                </CardContent>
+                 <CardFooter>
+                   <Button variant="link" className="px-0 text-primary hover:text-primary/80 text-sm">View Course</Button>
+                 </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </ClientOnly>
       </section>
     </>
   );
