@@ -40,45 +40,54 @@ body {
     --sidebar-foreground: 0 0% 20%;     /* Match main foreground */
     --sidebar-primary: 231 48% 48%;     /* Match main primary */
     --sidebar-primary-foreground: 0 0% 98%; /* Match main primary-foreground */
-    --sidebar-accent: 260 42% 55%;      /* Match main accent */
-    --sidebar-accent-foreground: 0 0% 98%; /* Match main accent-foreground */
+    --sidebar-accent: 215 25% 92%;      /* Using secondary as sidebar accent for light theme */
+    --sidebar-accent-foreground: 0 0% 9%; /* Match secondary-foreground */
     --sidebar-border: 215 20% 85%;       /* Match main border */
     --sidebar-ring: 231 48% 48%;        /* Match main ring */
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 231 48% 55%; /* Adjusted primary for dark mode */
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 260 42% 65%; /* Adjusted accent for dark mode */
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 62.8% 30.6%;
+    --background: 0 0% 10%; /* Slightly lighter dark for main bg: #1a1a1a */
+    --foreground: 0 0% 95%; /* Off-white text: #f2f2f2 */
+    
+    --card: 0 0% 14%; /* Card bg darker than image, but lighter than old: #242424 */
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 14%; /* Consistent with card */
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 231 55% 65%; /* Brighter blue for primary: #788EFF */
+    --primary-foreground: 0 0% 10%; /* Dark text on bright blue */
+    
+    --secondary: 0 0% 20%; /* Darker secondary: #333333 */
+    --secondary-foreground: 0 0% 90%; /* Lighter text on secondary */
+    
+    --muted: 0 0% 18%; /* Muted slightly lighter for card-like elements inside content: #2e2e2e */
+    --muted-foreground: 0 0% 60%; /* Muted text: #999999 */
+    
+    --accent: 260 50% 70%; /* Brighter purple for accent: #9966FF */
+    --accent-foreground: 0 0% 10%; /* Dark text on bright purple */
+    
+    --destructive: 0 70% 60%; /* Destructive color: #DB4437 */
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 231 48% 55%; /* Adjusted ring for dark mode */
+    
+    --border: 0 0% 25%; /* Border color: #404040 */
+    --input: 0 0% 20%; /* Input bg: #333333 */
+    --ring: 231 55% 65%; /* Ring color matches new primary */
+
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    --sidebar-background: 0 0% 8%; /* Darker sidebar for dark mode */
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 231 48% 55%;
-    --sidebar-primary-foreground: 0 0% 9%;
-    --sidebar-accent: 260 42% 65%;
-    --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 14.9%;
-    --sidebar-ring: 231 48% 55%;
+    --sidebar-background: 0 0% 8%; /* Darker sidebar for dark mode: #141414 */
+    --sidebar-foreground: 0 0% 90%; /* #e6e6e6 */
+    --sidebar-primary: 231 55% 65%; /* Match new primary */
+    --sidebar-primary-foreground: 0 0% 10%; /* Match new primary-foreground */
+    --sidebar-accent: 0 0% 16%;      /* Darker accent for sidebar hover items: #292929 */
+    --sidebar-accent-foreground: 0 0% 90%; /* Text on sidebar accent */
+    --sidebar-border: 0 0% 15%;       /* Sidebar border: #262626 */
+    --sidebar-ring: 231 55% 65%;
   }
 }
 
@@ -87,7 +96,16 @@ body {
     @apply border-border;
   }
   body {
-    /* Removed bg-background here, it's now on an inner wrapper in layout.tsx */
     @apply text-foreground;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
