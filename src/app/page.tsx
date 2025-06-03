@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/landing/HeroSection';
 import { FeaturesSection } from '@/components/landing/FeaturesSection';
+import { HowItWorksSection } from '@/components/landing/HowItWorksSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { AnimationOverlay } from '@/components/landing/AnimationOverlay';
@@ -32,6 +33,7 @@ export default function HomePage() {
     <div className="space-y-2 md:space-y-4">
       <HeroSection />
       <FeaturesSection />
+      <HowItWorksSection />
       <CommunitySection />
       <ContributorSection />
       <section className="py-16 md:py-24 text-center bg-secondary/30 rounded-lg shadow-lg">
