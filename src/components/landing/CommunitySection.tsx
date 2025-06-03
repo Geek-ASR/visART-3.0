@@ -11,21 +11,25 @@ const DiscordIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+
 const socialLinks = [
   {
     name: 'YouTube',
     icon: Youtube,
     href: '#', // Placeholder - replace with actual link
+    iconColor: 'text-red-600 group-hover:text-red-700',
   },
   {
     name: 'Discord',
     icon: DiscordIcon,
     href: '#', // Placeholder - replace with actual link
+    iconColor: 'text-indigo-500 group-hover:text-indigo-600', // Discord's blurple
   },
   {
     name: 'Instagram',
     icon: Instagram,
     href: '#', // Placeholder - replace with actual link
+    iconColor: 'text-pink-600 group-hover:text-pink-700', // Representative Instagram color
   },
 ];
 
@@ -51,7 +55,7 @@ export function CommunitySection() {
                   'group p-3 rounded-full bg-card/70 hover:bg-card/90 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 border border-primary/30 hover:border-accent'
                 )}
               >
-                <social.icon className="h-8 w-8 md:h-10 md:w-10 text-primary group-hover:text-accent transition-colors" />
+                <social.icon className={cn("h-8 w-8 md:h-10 md:w-10 transition-colors", social.iconColor)} />
               </Link>
               <span className="text-sm text-primary font-medium">{social.name}</span>
             </div>
