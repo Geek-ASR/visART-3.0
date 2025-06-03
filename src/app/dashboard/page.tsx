@@ -61,7 +61,7 @@ export default function DashboardPage() {
         </div>
         <div className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
           {learningTopics.map((topic) => (
-            <Card key={topic.id} className="min-w-[300px] bg-muted shadow-md">
+            <Card key={topic.id} className="min-w-[300px] bg-card shadow-md">
               <CardHeader>
                 <CardTitle className="text-lg">{topic.title}</CardTitle>
                 <CardDescription>{topic.exercises} exercises</CardDescription>
@@ -100,7 +100,7 @@ export default function DashboardPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
-            <Card key={course.id} className="bg-muted shadow-md overflow-hidden">
+            <Card key={course.id} className="bg-card shadow-md overflow-hidden">
               <div className="relative h-40 w-full">
                 <Image 
                     src={course.image} 

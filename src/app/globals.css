@@ -36,14 +36,14 @@ body {
     --radius: 0.5rem;
 
     /* Sidebar specific colors, reflecting the new theme */
-    --sidebar-background: 215 30% 96%;   /* Match main background */
-    --sidebar-foreground: 0 0% 20%;     /* Match main foreground */
-    --sidebar-primary: 231 48% 48%;     /* Match main primary */
-    --sidebar-primary-foreground: 0 0% 98%; /* Match main primary-foreground */
-    --sidebar-accent: 215 25% 92%;      /* Using secondary as sidebar accent for light theme */
-    --sidebar-accent-foreground: 0 0% 9%; /* Match secondary-foreground */
-    --sidebar-border: 215 20% 85%;       /* Match main border */
-    --sidebar-ring: 231 48% 48%;        /* Match main ring */
+    --sidebar-background: hsl(var(--background));
+    --sidebar-foreground: hsl(var(--foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--secondary)); /* Using main secondary for sidebar hover in light mode */
+    --sidebar-accent-foreground: hsl(var(--secondary-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
   }
   .dark {
     --background: 0 0% 10%; /* Slightly lighter dark for main bg: #1a1a1a */
@@ -80,14 +80,15 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    --sidebar-background: 0 0% 8%; /* Darker sidebar for dark mode: #141414 */
-    --sidebar-foreground: 0 0% 90%; /* #e6e6e6 */
-    --sidebar-primary: 231 55% 65%; /* Match new primary */
-    --sidebar-primary-foreground: 0 0% 10%; /* Match new primary-foreground */
-    --sidebar-accent: 0 0% 16%;      /* Darker accent for sidebar hover items: #292929 */
-    --sidebar-accent-foreground: 0 0% 90%; /* Text on sidebar accent */
-    --sidebar-border: 0 0% 15%;       /* Sidebar border: #262626 */
-    --sidebar-ring: 231 55% 65%;
+    /* Sidebar specific colors for dark mode, aligned with main theme */
+    --sidebar-background: hsl(var(--background));
+    --sidebar-foreground: hsl(var(--foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--secondary)); /* Using main secondary for sidebar hover in dark mode */
+    --sidebar-accent-foreground: hsl(var(--secondary-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
   }
 }
 

@@ -42,7 +42,7 @@ export function Sidebar() {
     <div className="w-64 bg-sidebar text-sidebar-foreground flex flex-col border-r border-sidebar-border">
       <div className="p-6">
         <Link href="/dashboard" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold font-headline text-primary">{'{VA;}'} VisArt</span>
+          <span className="text-2xl font-bold font-headline text-primary">VisART</span>
         </Link>
       </div>
       <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
