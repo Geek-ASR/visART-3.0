@@ -96,10 +96,10 @@ export default function DashboardPage() {
               <CardContent className="space-y-3">
                 <Progress value={topic.progress} aria-label={`${topic.title} progress ${topic.progress}%`} />
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <Button variant="outline" size="sm" className="border-blue-500 text-blue-500 hover:bg-blue-900/30 hover:text-blue-400 hover:border-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.4)] hover:shadow-[0_0_12px_rgba(59,130,246,0.6)] transition-all duration-300">Read Theory</Button>
-                  <Button variant="outline" size="sm" className="border-green-500 text-green-500 hover:bg-green-900/30 hover:text-green-400 hover:border-green-400 shadow-[0_0_8px_rgba(34,197,94,0.4)] hover:shadow-[0_0_12px_rgba(34,197,94,0.6)] transition-all duration-300">Visualize</Button>
-                  <Button variant="outline" size="sm" className="border-yellow-500 text-yellow-500 hover:bg-yellow-900/30 hover:text-yellow-400 hover:border-yellow-400 shadow-[0_0_8px_rgba(234,179,8,0.4)] hover:shadow-[0_0_12px_rgba(234,179,8,0.6)] transition-all duration-300">Start Quiz</Button>
-                  <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-900/30 hover:text-red-400 hover:border-red-400 shadow-[0_0_8px_rgba(239,68,68,0.4)] hover:shadow-[0_0_12px_rgba(239,68,68,0.6)] transition-all duration-300">Start Challenge</Button>
+                  <Button variant="outline" size="sm" className="border-blue-500 text-blue-500 hover:bg-blue-900/30 hover:text-blue-400 hover:border-blue-400 shadow-[0_0_5px_rgba(59,130,246,0.25)] hover:shadow-[0_0_8px_rgba(59,130,246,0.35)] transition-all duration-300">Read Theory</Button>
+                  <Button variant="outline" size="sm" className="border-green-500 text-green-500 hover:bg-green-900/30 hover:text-green-400 hover:border-green-400 shadow-[0_0_5px_rgba(34,197,94,0.25)] hover:shadow-[0_0_8px_rgba(34,197,94,0.35)] transition-all duration-300">Visualize</Button>
+                  <Button variant="outline" size="sm" className="border-yellow-500 text-yellow-500 hover:bg-yellow-900/30 hover:text-yellow-400 hover:border-yellow-400 shadow-[0_0_5px_rgba(234,179,8,0.25)] hover:shadow-[0_0_8px_rgba(234,179,8,0.35)] transition-all duration-300">Start Quiz</Button>
+                  <Button variant="outline" size="sm" className="border-red-500 text-red-500 hover:bg-red-900/30 hover:text-red-400 hover:border-red-400 shadow-[0_0_5px_rgba(239,68,68,0.25)] hover:shadow-[0_0_8px_rgba(239,68,68,0.35)] transition-all duration-300">Start Challenge</Button>
                 </div>
               </CardContent>
             </Card>
