@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export function ContributorSection() {
   return (
-    <section className="py-16 md:py-24 bg-card/50 backdrop-blur-sm rounded-lg shadow-lg border border-primary/20">
+    <section className="py-16 md:py-24">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Text Content */}
@@ -25,8 +25,8 @@ export function ContributorSection() {
 
           {/* Right Side: GitHub Icon and Buttons */}
           <div className="flex flex-col items-center space-y-6">
-            <Github className="h-20 w-20 md:h-24 md:w-24 text-primary" />
-            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-sm md:max-w-md">
+            <Github className="h-20 w-20 md:h-24 md:w-24 text-foreground" />
+            <div className="flex flex-col items-center gap-4 w-full max-w-xs sm:max-w-sm">
               <Button size="lg" asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="https://github.com/Geek-ASR/VisART" target="_blank" rel="noopener noreferrer">
                   <GitFork className="mr-2 h-5 w-5" /> GitHub Repo
