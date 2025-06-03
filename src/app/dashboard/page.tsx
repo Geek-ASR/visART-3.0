@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useRef } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -13,6 +14,8 @@ const learningTopics = [
   { id: 'binary_tree', title: 'Binary Tree', exercises: 15, progress: 30, color: 'bg-green-500' },
   { id: 'graphs', title: 'Graphs', exercises: 20, progress: 75, color: 'bg-purple-500' },
   { id: 'sorting', title: 'Sorting Algorithms', exercises: 10, progress: 40, color: 'bg-red-500' },
+  { id: 'linked_list', title: 'Linked Lists', exercises: 8, progress: 50, color: 'bg-yellow-500' },
+  { id: 'dynamic_programming', title: 'Dynamic Programming', exercises: 25, progress: 20, color: 'bg-indigo-500' },
 ];
 
 const courses = [
@@ -44,6 +47,31 @@ const courses = [
 
 
 export default function DashboardPage() {
+  const learningScrollContainerRef = useRef<HTMLDivElement>(null);
+  const courseScrollContainerRef = useRef<HTMLDivElement>(null); // Added for consistency, though not yet used for courses
+
+  const scrollLearningTopics = (direction: 'left' | 'right') => {
+    if (learningScrollContainerRef.current) {
+      const scrollAmount = 320; // Approx width of one card + gap
+      learningScrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+  
+  // Placeholder scroll function for courses if needed later
+  const scrollCourses = (direction: 'left' | 'right') => {
+    if (courseScrollContainerRef.current) {
+      const scrollAmount = 320; 
+      courseScrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+
   return (
     <>
       {/* Continue Learning Section */}
@@ -51,15 +79,15 @@ export default function DashboardPage() {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-foreground">Continue Learning</h2>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="h-8 w-8">
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('left')}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8">
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollLearningTopics('right')}>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
-        <div className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
+        <div ref={learningScrollContainerRef} className="flex space-x-4 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
           {learningTopics.map((topic) => (
             <Card key={topic.id} className="min-w-[300px] bg-card shadow-md">
               <CardHeader>
@@ -69,9 +97,9 @@ export default function DashboardPage() {
               <CardContent className="space-y-3">
                 <Progress value={topic.progress} aria-label={`${topic.title} progress ${topic.progress}%`} />
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <Button variant="outline" size="sm" className="bg-card hover:bg-card/80">Read Theory</Button>
-                  <Button variant="outline" size="sm" className="bg-card hover:bg-card/80">Visualize</Button>
-                  <Button variant="outline" size="sm" className="bg-card hover:bg-card/80">Start Quiz</Button>
+                  <Button variant="secondary" size="sm">Read Theory</Button>
+                  <Button variant="secondary" size="sm">Visualize</Button>
+                  <Button variant="secondary" size="sm">Start Quiz</Button>
                   <Button variant="default" size="sm" className="bg-primary hover:bg-primary/90">Start Challenge</Button>
                 </div>
               </CardContent>
@@ -90,15 +118,15 @@ export default function DashboardPage() {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-foreground">Continue Course</h2>
            <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="h-8 w-8">
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollCourses('left')}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8">
+            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => scrollCourses('right')}>
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={courseScrollContainerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
             <Card key={course.id} className="bg-card shadow-md overflow-hidden">
               <div className="relative h-40 w-full">
@@ -129,7 +157,3 @@ export default function DashboardPage() {
     </>
   );
 }
-
-// Helper for hiding scrollbar, add to globals.css if not already present
-// .scrollbar-hide::-webkit-scrollbar { display: none; }
-// .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
