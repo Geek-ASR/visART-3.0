@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="bg-secondary/30 text-secondary-foreground py-8 mt-auto backdrop-blur-sm">
       <div className="container mx-auto px-4 text-center">
-        <p className="text-sm">&copy; {new Date().getFullYear()} AlgoVisuals. All rights reserved.</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} VisART.</p>
         <p className="text-xs mt-1 mb-6">Learn DSA the interactive way.</p>
         
         <div className="border-t border-secondary-foreground/20 pt-6">
