@@ -89,7 +89,7 @@ export function AuthForm() {
             {activeTab === 'signin' ? 'Welcome Back!' : 'Create Account'}
           </CardTitle>
           <CardDescription>
-            {activeTab === 'signin' ? 'Sign in to access your AlgoVisuals journey.' : 'Join AlgoVisuals to start learning DSA interactively.'}
+            {activeTab === 'signin' ? 'Sign in to access your VisART journey.' : 'Join VisART to start learning DSA interactively.'}
           </CardDescription>
           <TabsList className="grid w-full grid-cols-2 mt-4">
             <TabsTrigger value="signin">Sign In</TabsTrigger>
