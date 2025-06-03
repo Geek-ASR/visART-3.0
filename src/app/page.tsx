@@ -27,7 +27,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="space-y-16 md:space-y-24">
+    <div className="space-y-12 md:space-y-20">
       <HeroSection />
       <FeaturesSection />
       <section className="py-16 md:py-24 text-center bg-secondary/30 rounded-lg shadow-lg">
