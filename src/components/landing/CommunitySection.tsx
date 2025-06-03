@@ -17,19 +17,19 @@ const socialLinks = [
     name: 'YouTube',
     icon: Youtube,
     href: '#', // Placeholder - replace with actual link
-    iconColor: 'text-red-600 group-hover:text-red-700',
+    iconColor: 'text-destructive group-hover:text-destructive/90',
   },
   {
     name: 'Discord',
     icon: DiscordIcon,
     href: '#', // Placeholder - replace with actual link
-    iconColor: 'text-indigo-500 group-hover:text-indigo-600', // Discord's blurple
+    iconColor: 'text-indigo-500 group-hover:text-indigo-600', 
   },
   {
     name: 'Instagram',
     icon: Instagram,
     href: '#', // Placeholder - replace with actual link
-    iconColor: 'text-pink-600 group-hover:text-pink-700', // Representative Instagram color
+    iconColor: 'text-accent group-hover:text-accent/90', 
   },
 ];
 
