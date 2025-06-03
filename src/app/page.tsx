@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -27,7 +26,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="space-y-8 md:space-y-16">
+    <div className="space-y-4 md:space-y-8">
       <HeroSection />
       <FeaturesSection />
       <section className="py-16 md:py-24 text-center bg-secondary/30 rounded-lg shadow-lg">

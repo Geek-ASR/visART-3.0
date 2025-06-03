@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -145,7 +144,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        <div className="mt-12 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {statsData.map((stat) => (
             <AnimatedStat
               key={stat.label}
@@ -159,4 +158,3 @@ export function HeroSection() {
     </section>
   );
 }
-
