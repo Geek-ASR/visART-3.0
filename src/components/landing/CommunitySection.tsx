@@ -31,7 +31,7 @@ const socialLinks = [
 
 export function CommunitySection() {
   return (
-    <section className="py-16 md:py-24 text-center bg-secondary/30 rounded-lg shadow-xl backdrop-blur-sm border border-primary/20">
+    <section className="py-16 md:py-24 text-center">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4 text-primary">
           Join Our Vibrant Community
@@ -41,18 +41,20 @@ export function CommunitySection() {
         </p>
         <div className="flex justify-center space-x-6 md:space-x-10">
           {socialLinks.map((social) => (
-            <Link
-              key={social.name}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Follow us on ${social.name}`}
-              className={cn(
-                'group p-3 rounded-full bg-card/50 hover:bg-card/80 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 border border-primary/20 hover:border-accent'
-              )}
-            >
-              <social.icon className="h-8 w-8 md:h-10 md:w-10 text-primary group-hover:text-accent transition-colors" />
-            </Link>
+            <div key={social.name} className="flex flex-col items-center space-y-2">
+              <Link
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Follow us on ${social.name}`}
+                className={cn(
+                  'group p-3 rounded-full bg-card/70 hover:bg-card/90 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 border border-primary/30 hover:border-accent'
+                )}
+              >
+                <social.icon className="h-8 w-8 md:h-10 md:w-10 text-primary group-hover:text-accent transition-colors" />
+              </Link>
+              <span className="text-sm text-primary font-medium">{social.name}</span>
+            </div>
           ))}
         </div>
       </div>
