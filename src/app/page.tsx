@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,6 +7,7 @@ import { FeaturesSection } from '@/components/landing/FeaturesSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { AnimationOverlay } from '@/components/landing/AnimationOverlay';
+import { CommunitySection } from '@/components/landing/CommunitySection';
 
 export default function HomePage() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -29,6 +31,7 @@ export default function HomePage() {
     <div className="space-y-2 md:space-y-4">
       <HeroSection />
       <FeaturesSection />
+      <CommunitySection />
       <section className="py-16 md:py-24 text-center bg-secondary/30 rounded-lg shadow-lg">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold font-headline mb-6 text-primary">Ready to Elevate Your DSA Skills?</h2>
