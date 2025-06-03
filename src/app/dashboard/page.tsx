@@ -50,51 +50,35 @@ const courses = [
 export default function DashboardPage() {
   const learningScrollContainerRef = useRef<HTMLDivElement>(null);
   const courseScrollContainerRef = useRef<HTMLDivElement>(null); 
-  const [activeLearningDotIndex, setActiveLearningDotIndex] = useState(0);
   const learningItemEffectiveWidth = 300 + 16; // card min-width (300px) + space-x-4 gap (1rem = 16px)
+  const [currentLearningScrollIndex, setCurrentLearningScrollIndex] = useState(0);
 
 
   const scrollLearningTopics = (direction: 'left' | 'right') => {
     if (!learningScrollContainerRef.current || learningTopics.length === 0) return;
 
+    const container = learningScrollContainerRef.current;
+    const currentScrollLeft = container.scrollLeft;
+    // Calculate current visual index based on scroll position
+    const visualCurrentIndex = Math.round(currentScrollLeft / learningItemEffectiveWidth);
+
     let newIndex;
     if (direction === 'left') {
-      newIndex = Math.max(activeLearningDotIndex - 1, 0);
+      newIndex = Math.max(visualCurrentIndex - 1, 0);
     } else {
-      newIndex = Math.min(activeLearningDotIndex + 1, learningTopics.length - 1);
+      // Consider how many items fit in view to avoid scrolling too far past the last item
+      const itemsInView = Math.floor(container.clientWidth / learningItemEffectiveWidth);
+      const maxIndex = Math.max(0, learningTopics.length - itemsInView);
+      newIndex = Math.min(visualCurrentIndex + 1, maxIndex);
     }
-
-    if (newIndex !== activeLearningDotIndex) {
-        learningScrollContainerRef.current.scrollTo({
-            left: newIndex * learningItemEffectiveWidth,
-            behavior: 'smooth',
-        });
-        setActiveLearningDotIndex(newIndex);
-    }
+    
+    container.scrollTo({
+        left: newIndex * learningItemEffectiveWidth,
+        behavior: 'smooth',
+    });
+    setCurrentLearningScrollIndex(newIndex); // Keep track of a logical index if needed for other purposes
   };
   
-  useEffect(() => {
-    const container = learningScrollContainerRef.current;
-    if (!container || learningTopics.length === 0) return;
-
-    let scrollTimeout: NodeJS.Timeout;
-    const handleScroll = () => {
-      clearTimeout(scrollTimeout);
-      const currentScrollLeft = container.scrollLeft;
-      scrollTimeout = setTimeout(() => {
-        const newIndex = Math.round(currentScrollLeft / learningItemEffectiveWidth);
-        const clampedIndex = Math.max(0, Math.min(newIndex, learningTopics.length - 1));
-        setActiveLearningDotIndex(clampedIndex);
-      }, 150); // Debounce time
-    };
-
-    container.addEventListener('scroll', handleScroll);
-    return () => {
-      clearTimeout(scrollTimeout);
-      container.removeEventListener('scroll', handleScroll);
-    };
-  }, [learningTopics.length, learningItemEffectiveWidth]);
-
 
   const scrollCourses = (direction: 'left' | 'right') => {
     if (courseScrollContainerRef.current) {
@@ -144,16 +128,6 @@ export default function DashboardPage() {
               </Card>
             ))}
           </div>
-          {learningTopics.length > 0 && (
-            <div className="flex justify-center space-x-1.5 mt-4">
-                {learningTopics.map((_, i) => (
-                    <div 
-                      key={i} 
-                      className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${i === activeLearningDotIndex ? 'bg-primary scale-125' : 'bg-muted-foreground/50'}`}
-                    />
-                ))}
-            </div>
-          )}
         </ClientOnly>
       </section>
 
@@ -178,8 +152,8 @@ export default function DashboardPage() {
                   <Image 
                       src={course.image} 
                       alt={course.title} 
-                      fill // Changed from layout="fill" to fill
-                      style={{objectFit: 'cover'}} // Changed from objectFit="cover"
+                      fill 
+                      style={{objectFit: 'cover'}} 
                       data-ai-hint={course.aiHint}
                   />
                 </div>
