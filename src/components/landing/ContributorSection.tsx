@@ -12,7 +12,7 @@ export function ContributorSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Text Content */}
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary text-center">
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary text-center md:text-left">
               Be a Contributor
             </h2>
             <p className="text-lg text-muted-foreground text-left">
@@ -25,7 +25,7 @@ export function ContributorSection() {
 
           {/* Right Side: GitHub Icon and Buttons */}
           <div className="flex flex-col items-center space-y-6">
-            <Github className="h-20 w-20 md:h-24 md:w-24 text-foreground shadow-lg hover:shadow-xl transition-shadow duration-300" />
+            <Github className="h-20 w-20 md:h-24 md:w-24 text-foreground" />
             <div className="flex flex-col items-center gap-4 w-full max-w-xs sm:max-w-sm">
               <Button size="lg" asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="https://github.com/Geek-ASR/VisART" target="_blank" rel="noopener noreferrer">
