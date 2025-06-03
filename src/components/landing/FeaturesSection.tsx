@@ -51,7 +51,7 @@ export function FeaturesSection() {
             <Card 
               key={index} 
               className={cn(
-                "shadow-lg hover:shadow-xl transition-shadow duration-300 backdrop-blur-sm",
+                "shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out backdrop-blur-sm border border-primary/20 hover:border-accent hover:scale-[1.02]",
                 feature.bgOpacityClass
               )}
             >
