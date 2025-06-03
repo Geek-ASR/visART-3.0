@@ -11,21 +11,21 @@ export function ContributorSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side: Text Content */}
-          <div className="space-y-6 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
+          <div className="space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary text-center">
               Be a Contributor
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground text-left">
               VisART is more than just a platform; it's a community-driven project. We believe that the best way to learn is to build and share. If you're passionate about DSA and want to make a difference, join us! Contribute your code, ideas, or documentation and help us grow.
             </p>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground text-left">
               Don't just be a viewer – be a part of the journey. Let's build the future of interactive DSA learning together!
             </p>
           </div>
 
           {/* Right Side: GitHub Icon and Buttons */}
           <div className="flex flex-col items-center space-y-6">
-            <Github className="h-20 w-20 md:h-24 md:w-24 text-foreground" />
+            <Github className="h-20 w-20 md:h-24 md:w-24 text-foreground shadow-lg hover:shadow-xl transition-shadow duration-300" />
             <div className="flex flex-col items-center gap-4 w-full max-w-xs sm:max-w-sm">
               <Button size="lg" asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="https://github.com/Geek-ASR/VisART" target="_blank" rel="noopener noreferrer">
