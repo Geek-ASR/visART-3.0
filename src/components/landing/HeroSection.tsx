@@ -129,7 +129,7 @@ export function HeroSection() {
           Visualize, learn, and code Data Structures and Algorithms like never before. VisART provides various features to enhance your logic-building skills and excel in problem-solving.
         </p>
         <div className="flex items-center justify-center space-x-4">
-          <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+           <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Link href="/solve">
               <PlayCircle className="mr-2 h-5 w-5" /> Get Started
             </Link>
@@ -145,7 +145,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        <div className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+        <div className="mt-12 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {statsData.map((stat) => (
             <AnimatedStat
               key={stat.label}
