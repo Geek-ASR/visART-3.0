@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { Lock, Mail, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -51,6 +52,7 @@ type SignInFormValues = z.infer<typeof signInSchema>;
 
 export function AuthForm() {
   const { toast } = useToast();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState('signin');
 
   const signUpForm = useForm<SignUpFormValues>({
@@ -67,18 +69,21 @@ export function AuthForm() {
     console.log('Sign Up Data:', data);
     // TODO: Implement Firebase Sign Up
     toast({ title: 'Sign Up Attempted', description: 'Check console for data. (Not implemented)' });
+    // Optionally navigate after sign up too, e.g., router.push('/');
   };
 
   const onSignInSubmit = (data: SignInFormValues) => {
     console.log('Sign In Data:', data);
     // TODO: Implement Firebase Sign In
-    toast({ title: 'Sign In Attempted', description: 'Check console for data. (Not implemented)' });
+    toast({ title: 'Sign In Successful (Mock)', description: 'Redirecting to homepage...' });
+    router.push('/');
   };
   
   const handleGoogleAuth = (mode: 'signin' | 'signup') => {
     console.log(`Google ${mode} action`);
     // TODO: Implement Firebase Google Sign In/Up
-    toast({ title: `Google ${mode === 'signin' ? 'Sign In' : 'Sign Up'}`, description: 'Not implemented.' });
+    toast({ title: `Google ${mode === 'signin' ? 'Sign In' : 'Sign Up'} (Mock)`, description: 'Redirecting to homepage...' });
+    router.push('/'); // Also navigate on Google sign-in/up for mock purposes
   }
 
   return (
