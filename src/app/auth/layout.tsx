@@ -1,7 +1,5 @@
 
 import type { Metadata } from 'next';
-import { Toaster } from "@/components/ui/toaster";
-import { WaveBackground } from '@/components/layout/WaveBackground';
 
 export const metadata: Metadata = {
   title: 'Sign In/Up - VisART',
@@ -14,14 +12,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <WaveBackground />
-      {/* This div will center the AuthForm (children) on the page with some padding */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center bg-background/30 backdrop-blur-sm p-4">
-        {/* The children (AuthForm component) is directly rendered here, centered by the parent div */}
-        {children}
-      </div>
-      <Toaster />
-    </>
+    // WaveBackground and Toaster are now handled by RootLayout.
+    // This div centers the AuthForm (children) on the page.
+    // It's placed directly inside the conditional rendering block of RootLayout.
+    <div className="flex flex-grow items-center justify-center bg-background/30 backdrop-blur-sm p-4">
+      {children}
+    </div>
   );
 }
