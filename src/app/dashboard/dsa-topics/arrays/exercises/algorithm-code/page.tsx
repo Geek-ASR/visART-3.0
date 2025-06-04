@@ -10,10 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Prism from 'prismjs';
-import 'prismjs/components/prism-cpp';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-java';
-
+// Language components (prism-cpp, prism-python, prism-java) will be dynamically imported in useEffect.
 
 const pseudoCode = {
   access: `FUNCTION getElement(array, index)
@@ -141,15 +138,35 @@ type LanguageKey = keyof typeof codeExamples;
 
 export default function ArrayAlgorithmCodePage() {
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageKey>('cpp');
+  const [languagesLoaded, setLanguagesLoaded] = useState(false);
 
   useEffect(() => {
-    // Highlight all code blocks on language change or initial render
-    // setTimeout ensures DOM is ready for Prism to find elements
-    const timer = setTimeout(() => {
-      Prism.highlightAll();
-    }, 0);
-    return () => clearTimeout(timer);
-  }, [selectedLanguage]);
+    async function loadLanguages() {
+      await import('prismjs/components/prism-clike');
+      await import('prismjs/components/prism-c');
+      await import('prismjs/components/prism-cpp');
+      await import('prismjs/components/prism-python');
+      await import('prismjs/components/prism-java');
+      setLanguagesLoaded(true);
+    }
+
+    if (typeof window !== 'undefined') { // Ensure this runs only on the client
+      loadLanguages();
+    }
+  }, []); // Empty dependency array ensures this runs once on mount
+
+  useEffect(() => {
+    if (languagesLoaded) {
+      // Highlight all code blocks on language change or initial render if languages are loaded
+      // setTimeout ensures DOM is ready for Prism to find elements
+      const timer = setTimeout(() => {
+        if (typeof Prism !== 'undefined' && Prism.highlightAll) {
+          Prism.highlightAll();
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedLanguage, languagesLoaded]); // Re-run when selectedLanguage or languagesLoaded changes
 
   return (
     <div className="space-y-8">
