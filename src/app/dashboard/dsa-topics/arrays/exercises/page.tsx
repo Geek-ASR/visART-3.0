@@ -39,7 +39,7 @@ const arrayExercisesData: ExerciseDetail[] = [
       { icon: Code2, label: 'Code' },
     ],
     actionText: 'View',
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/arrays/exercises/algorithm-code',
   },
   {
     id: 'arrays-ex3',
