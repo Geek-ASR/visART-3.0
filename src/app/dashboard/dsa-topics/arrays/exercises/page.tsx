@@ -48,7 +48,7 @@ const arrayExercisesData: ExerciseDetail[] = [
       { icon: HelpCircle, label: 'Quiz 1: Conceptual Understanding' },
     ],
     actionText: 'Solve',
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/arrays/exercises/quiz-conceptual',
   },
   {
     id: 'arrays-ex4',
