@@ -1,4 +1,5 @@
 
+@import 'prismjs/themes/prism-okaidia.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -109,4 +110,20 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+}
+
+/* Styles for PrismJS theme to ensure it fits well with ScrollArea and Tailwind */
+pre[class*="language-"] {
+  @apply !m-0 !rounded-none p-3 h-full; /* Reset margin, no rounding from theme, ensure padding, full height */
+}
+
+code[class*="language-"] {
+  @apply font-code text-sm; /* Apply our consistent code font and size */
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-muted-foreground; /* Softer comments */
 }

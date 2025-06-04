@@ -2,13 +2,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowLeft, FunctionSquare, Code2, Terminal } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-cpp';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+
 
 const pseudoCode = {
   access: `FUNCTION getElement(array, index)
@@ -137,6 +142,15 @@ type LanguageKey = keyof typeof codeExamples;
 export default function ArrayAlgorithmCodePage() {
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageKey>('cpp');
 
+  useEffect(() => {
+    // Highlight all code blocks on language change or initial render
+    // setTimeout ensures DOM is ready for Prism to find elements
+    const timer = setTimeout(() => {
+      Prism.highlightAll();
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [selectedLanguage]);
+
   return (
     <div className="space-y-8">
       {/* Back Button */}
@@ -210,9 +224,11 @@ export default function ArrayAlgorithmCodePage() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="text-md font-medium text-foreground mb-2">Code:</h4>
-                    <ScrollArea className="h-[300px] w-full rounded-md border bg-muted/30 p-1">
-                      <pre className="p-3 text-sm font-code whitespace-pre-wrap">
-                        {codeExamples[lang].code}
+                    <ScrollArea className="h-[300px] w-full rounded-md border bg-card"> {/* bg-card as fallback */}
+                      <pre className="!m-0 h-full"> {/* Base styles for pre, Prism theme will add more */}
+                        <code className={`language-${lang} text-sm font-code block whitespace-pre-wrap`}>
+                          {codeExamples[lang].code}
+                        </code>
                       </pre>
                     </ScrollArea>
                   </div>
