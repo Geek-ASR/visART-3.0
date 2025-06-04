@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Code, Layers3, CaseSensitive, Share2, Layers, ListOrdered, Hash, Combine, RefreshCcw, BookOpen, Eye, Terminal } from 'lucide-react';
+import { ArrowLeft, Code, Layers3, CaseSensitive, Share2, Layers, ListOrdered, Hash, Combine, RefreshCcw, Terminal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface SubTopic {
@@ -13,9 +13,7 @@ interface SubTopic {
   title: string;
   description: string;
   icon: LucideIcon;
-  theoryLink: string;
-  visualizeLink: string;
-  problemsLink: string;
+  exercisesLink: string;
 }
 
 const pathDetailsMap: Record<string, { title: string; description: string; emoji: string; subTopics: SubTopic[] }> = {
@@ -24,15 +22,15 @@ const pathDetailsMap: Record<string, { title: string; description: string; emoji
     description: 'Master the core building blocks of programming.',
     emoji: '🚀',
     subTopics: [
-      { id: 'arrays', title: 'Arrays', description: 'Contiguous memory storage and basic operations.', icon: Code, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'vectors', title: 'Vectors / Dynamic Arrays', description: 'Resizable arrays and their performance.', icon: Layers3, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'strings', title: 'Strings', description: 'Manipulation, common algorithms, and representations.', icon: CaseSensitive, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'linked-lists', title: 'Linked Lists', description: 'Pointer-based structures: singly, doubly, circular.', icon: Share2, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'stacks', title: 'Stacks', description: 'Last-In, First-Out (LIFO) data structures.', icon: Layers, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'queues', title: 'Queues', description: 'First-In, First-Out (FIFO) data structures.', icon: ListOrdered, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'hash-maps', title: 'Hash Maps (Dictionaries)', description: 'Key-value pair storage with efficient lookups.', icon: Hash, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'sets', title: 'Sets', description: 'Collections of unique elements and their operations.', icon: Combine, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'recursion-basics', title: 'Recursion Basics', description: 'Fundamental concepts of recursive problem-solving.', icon: RefreshCcw, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
+      { id: 'arrays', title: 'Arrays', description: 'Contiguous memory storage and basic operations.', icon: Code, exercisesLink: '#' },
+      { id: 'vectors', title: 'Vectors / Dynamic Arrays', description: 'Resizable arrays and their performance.', icon: Layers3, exercisesLink: '#' },
+      { id: 'strings', title: 'Strings', description: 'Manipulation, common algorithms, and representations.', icon: CaseSensitive, exercisesLink: '#' },
+      { id: 'linked-lists', title: 'Linked Lists', description: 'Pointer-based structures: singly, doubly, circular.', icon: Share2, exercisesLink: '#' },
+      { id: 'stacks', title: 'Stacks', description: 'Last-In, First-Out (LIFO) data structures.', icon: Layers, exercisesLink: '#' },
+      { id: 'queues', title: 'Queues', description: 'First-In, First-Out (FIFO) data structures.', icon: ListOrdered, exercisesLink: '#' },
+      { id: 'hash-maps', title: 'Hash Maps (Dictionaries)', description: 'Key-value pair storage with efficient lookups.', icon: Hash, exercisesLink: '#' },
+      { id: 'sets', title: 'Sets', description: 'Collections of unique elements and their operations.', icon: Combine, exercisesLink: '#' },
+      { id: 'recursion-basics', title: 'Recursion Basics', description: 'Fundamental concepts of recursive problem-solving.', icon: RefreshCcw, exercisesLink: '#' },
     ],
   },
   // Add other paths here if needed in the future
@@ -87,20 +85,10 @@ export default function DsaPathDetailPage() {
             <CardContent className="flex-grow">
               {/* Content for sub-topic card if needed */}
             </CardContent>
-            <CardFooter className="flex flex-col sm:flex-row sm:flex-wrap gap-2 pt-4">
-              <Button asChild variant="outline" size="sm" className="flex-1 min-w-[120px]">
-                <Link href={topic.theoryLink}>
-                  <BookOpen className="mr-2 h-4 w-4" /> Learn Theory
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="sm" className="flex-1 min-w-[120px]">
-                <Link href={topic.visualizeLink}>
-                  <Eye className="mr-2 h-4 w-4" /> Visualize
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="sm" className="flex-1 min-w-[120px] sm:col-span-2 md:col-span-1 lg:col-span-2 bg-primary/10 text-primary border-primary/50 hover:bg-primary/20">
-                <Link href={topic.problemsLink}>
-                  <Terminal className="mr-2 h-4 w-4" /> Solve Problems
+            <CardFooter className="pt-4">
+              <Button asChild size="sm" className="w-full bg-primary/10 text-primary border-primary/50 hover:bg-primary/20">
+                <Link href={topic.exercisesLink}>
+                  <Terminal className="mr-2 h-4 w-4" /> Exercises
                 </Link>
               </Button>
             </CardFooter>
