@@ -22,7 +22,7 @@ const pathDetailsMap: Record<string, { title: string; description: string; emoji
     description: 'Master the core building blocks of programming.',
     emoji: '🚀',
     subTopics: [
-      { id: 'arrays', title: 'Arrays', description: 'Contiguous memory storage and basic operations.', icon: Code, exercisesLink: '#' },
+      { id: 'arrays', title: 'Arrays', description: 'Contiguous memory storage and basic operations.', icon: Code, exercisesLink: '/dashboard/dsa-topics/arrays/exercises' },
       { id: 'vectors', title: 'Vectors / Dynamic Arrays', description: 'Resizable arrays and their performance.', icon: Layers3, exercisesLink: '#' },
       { id: 'strings', title: 'Strings', description: 'Manipulation, common algorithms, and representations.', icon: CaseSensitive, exercisesLink: '#' },
       { id: 'linked-lists', title: 'Linked Lists', description: 'Pointer-based structures: singly, doubly, circular.', icon: Share2, exercisesLink: '#' },
