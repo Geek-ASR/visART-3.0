@@ -29,7 +29,7 @@ const arrayExercisesData: ExerciseDetail[] = [
       { icon: LayoutGrid, label: 'Applications' },
     ],
     actionText: 'View',
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/arrays/exercises/theory-applications-intro',
   },
   {
     id: 'arrays-ex2',
