@@ -121,9 +121,54 @@ code[class*="language-"] {
   @apply font-code text-sm; /* Apply our consistent code font and size */
 }
 
+/* Default comment color from PrismJS can be too light or dark depending on theme */
+/* This ensures comments are consistently styled using muted-foreground */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-muted-foreground; /* Softer comments */
+  @apply text-muted-foreground;
+}
+
+/* Custom PrismJS overrides for code blocks on `bg-muted` backgrounds (e.g., in quizzes) */
+/* This ensures dark text on light `bg-muted` for better readability. */
+pre.bg-muted code[class*="language-"] {
+  color: hsl(var(--foreground)); /* Base text color */
+}
+
+pre.bg-muted code[class*="language-"] .token.keyword,
+pre.bg-muted code[class*="language-"] .token.function,
+pre.bg-muted code[class*="language-"] .token.selector,
+pre.bg-muted code[class*="language-"] .token.string,
+pre.bg-muted code[class*="language-"] .token.char,
+pre.bg-muted code[class*="language-"] .token.builtin,
+pre.bg-muted code[class*="language-"] .token.inserted,
+pre.bg-muted code[class*="language-"] .token.operator,
+pre.bg-muted code[class*="language-"] .token.entity,
+pre.bg-muted code[class*="language-"] .token.url,
+pre.bg-muted code[class*="language-"] .language-css .token.string,
+pre.bg-muted code[class*="language-"] .style .token.string,
+pre.bg-muted code[class*="language-"] .token.variable,
+pre.bg-muted code[class*="language-"] .token.atrule,
+pre.bg-muted code[class*="language-"] .token.attr-value,
+pre.bg-muted code[class*="language-"] .token.class-name,
+pre.bg-muted code[class*="language-"] .token.regex,
+pre.bg-muted code[class*="language-"] .token.important,
+pre.bg-muted code[class*="language-"] .token.punctuation,
+pre.bg-muted code[class*="language-"] .token.property,
+pre.bg-muted code[class*="language-"] .token.tag,
+pre.bg-muted code[class*="language-"] .token.boolean,
+pre.bg-muted code[class*="language-"] .token.number,
+pre.bg-muted code[class*="language-"] .token.constant,
+pre.bg-muted code[class*="language-"] .token.symbol,
+pre.bg-muted code[class*="language-"] .token.deleted {
+  color: hsl(var(--foreground)) !important; /* Override token colors to be dark */
+}
+
+/* Ensure comments remain distinct using muted-foreground */
+pre.bg-muted code[class*="language-"] .token.comment,
+pre.bg-muted code[class*="language-"] .token.prolog,
+pre.bg-muted code[class*="language-"] .token.doctype,
+pre.bg-muted code[class*="language-"] .token.cdata {
+  color: hsl(var(--muted-foreground)) !important;
 }
