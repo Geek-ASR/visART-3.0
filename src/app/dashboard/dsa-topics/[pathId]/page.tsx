@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Code, Layers3d, CaseSensitive, Share2, Layers, ListOrdered, Hash, Combine, RefreshCcw, BookOpen, Eye, Terminal } from 'lucide-react';
+import { ArrowLeft, Code, Layers3, CaseSensitive, Share2, Layers, ListOrdered, Hash, Combine, RefreshCcw, BookOpen, Eye, Terminal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface SubTopic {
@@ -25,7 +25,7 @@ const pathDetailsMap: Record<string, { title: string; description: string; emoji
     emoji: '🚀',
     subTopics: [
       { id: 'arrays', title: 'Arrays', description: 'Contiguous memory storage and basic operations.', icon: Code, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
-      { id: 'vectors', title: 'Vectors / Dynamic Arrays', description: 'Resizable arrays and their performance.', icon: Layers3d, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
+      { id: 'vectors', title: 'Vectors / Dynamic Arrays', description: 'Resizable arrays and their performance.', icon: Layers3, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
       { id: 'strings', title: 'Strings', description: 'Manipulation, common algorithms, and representations.', icon: CaseSensitive, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
       { id: 'linked-lists', title: 'Linked Lists', description: 'Pointer-based structures: singly, doubly, circular.', icon: Share2, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
       { id: 'stacks', title: 'Stacks', description: 'Last-In, First-Out (LIFO) data structures.', icon: Layers, theoryLink: '#', visualizeLink: '#', problemsLink: '#' },
