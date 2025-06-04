@@ -199,23 +199,43 @@ export default function ArrayAlgorithmCodePage() {
         <CardContent className="space-y-6">
           <div>
             <h3 className="text-lg font-medium text-foreground mb-2">Accessing Element</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto font-code">{pseudoCode.access}</pre>
+            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+              <code className="language-clike font-code block whitespace-pre-wrap">
+                {pseudoCode.access}
+              </code>
+            </pre>
           </div>
           <div>
             <h3 className="text-lg font-medium text-foreground mb-2">Insertion at End</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto font-code">{pseudoCode.insertEnd}</pre>
+            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+              <code className="language-clike font-code block whitespace-pre-wrap">
+                {pseudoCode.insertEnd}
+              </code>
+            </pre>
           </div>
           <div>
             <h3 className="text-lg font-medium text-foreground mb-2">Insertion at Index</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto font-code">{pseudoCode.insertMiddle}</pre>
+            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+              <code className="language-clike font-code block whitespace-pre-wrap">
+                {pseudoCode.insertMiddle}
+              </code>
+            </pre>
           </div>
           <div>
             <h3 className="text-lg font-medium text-foreground mb-2">Deletion at Index</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto font-code">{pseudoCode.delete}</pre>
+            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+              <code className="language-clike font-code block whitespace-pre-wrap">
+                {pseudoCode.delete}
+              </code>
+            </pre>
           </div>
           <div>
             <h3 className="text-lg font-medium text-foreground mb-2">Linear Search</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto font-code">{pseudoCode.search}</pre>
+            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+              <code className="language-clike font-code block whitespace-pre-wrap">
+                {pseudoCode.search}
+              </code>
+            </pre>
           </div>
         </CardContent>
       </Card>
