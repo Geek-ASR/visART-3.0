@@ -57,7 +57,7 @@ const arrayExercisesData: ExerciseDetail[] = [
       { icon: HelpCircle, label: 'Quiz 2: Scenario-Based and Algorithm Analysis' },
     ],
     actionText: 'Solve',
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/arrays/exercises/quiz-scenario-analysis',
   },
   {
     id: 'arrays-ex5',
