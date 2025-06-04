@@ -1,7 +1,7 @@
 
 'use client';
 
-import React from 'react'; // Added React import
+import React from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ const learningPathsData: LearningPath[] = [
       'Hash Maps & Sets',
       'Recursion Basics',
     ],
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/beginner-ds',
   },
   {
     id: 'problem-solving',
