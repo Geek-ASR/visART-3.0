@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { BarChart as BarChartIcon, BookOpen, CheckCircle, ListChecks } from 'lucide-react';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart as RechartsBarChart } from 'recharts';
+import { Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart as RechartsBarChart } from 'recharts';
 
 const overallProgress = {
   problemsSolved: 23,
@@ -30,11 +30,11 @@ const chartConfig = {
   },
   solved: {
     label: "Solved",
-    color: "hsl(var(--primary))", // Use primary theme color for solved bars
+    color: "hsl(var(--primary))", 
   },
   remaining: {
     label: "Remaining",
-    color: "hsl(var(--muted))", // Use muted for remaining
+    color: "hsl(var(--muted))", 
   }
 };
 
@@ -147,4 +147,3 @@ export default function DashboardProgressPage() {
     </div>
   );
 }
-

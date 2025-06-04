@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ClientOnly } from '@/components/layout/ClientOnly';
+import Image from 'next/image';
 
 // Sample Data
 const learningTopics = [
@@ -21,32 +22,36 @@ const learningTopics = [
 export default function DashboardPage() {
   const learningScrollContainerRef = useRef<HTMLDivElement>(null);
   const learningItemEffectiveWidth = 300 + 16; // card min-width (300px) + space-x-4 gap (1rem = 16px)
-  const [currentLearningScrollIndex, setCurrentLearningScrollIndex] = useState(0);
-
 
   const scrollLearningTopics = (direction: 'left' | 'right') => {
     if (!learningScrollContainerRef.current || learningTopics.length === 0) return;
 
     const container = learningScrollContainerRef.current;
     const currentScrollLeft = container.scrollLeft;
-    // Calculate current visual index based on scroll position
+    
     const visualCurrentIndex = Math.round(currentScrollLeft / learningItemEffectiveWidth);
 
     let newIndex;
     if (direction === 'left') {
       newIndex = Math.max(visualCurrentIndex - 1, 0);
     } else {
-      // Consider how many items fit in view to avoid scrolling too far past the last item
       const itemsInView = Math.floor(container.clientWidth / learningItemEffectiveWidth);
-      const maxIndex = Math.max(0, learningTopics.length - itemsInView);
+      const maxIndex = Math.max(0, learningTopics.length - itemsInView); // Ensures we don't scroll past the last item such that it's not visible
       newIndex = Math.min(visualCurrentIndex + 1, maxIndex);
+      // If already at maxIndex due to few items, ensure we don't try to scroll further than makes sense.
+      // A more robust calculation might involve maxScrollLeft.
+      if (visualCurrentIndex === newIndex && newIndex === maxIndex && learningTopics.length > itemsInView) {
+         // If we are at the last "page" and try to go right, don't change index
+      } else if (visualCurrentIndex === newIndex && newIndex === maxIndex && learningTopics.length <= itemsInView) {
+        // If all items are in view, don't scroll
+        return;
+      }
     }
     
     container.scrollTo({
         left: newIndex * learningItemEffectiveWidth,
         behavior: 'smooth',
     });
-    setCurrentLearningScrollIndex(newIndex); // Keep track of a logical index if needed for other purposes
   };
   
   return (
