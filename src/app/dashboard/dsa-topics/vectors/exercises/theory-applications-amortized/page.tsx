@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Lightbulb, Sparkles, CheckCircle, XCircle, Code, Layers3, Zap, AreaChart } from 'lucide-react';
+import { ArrowLeft, Lightbulb, Sparkles, CheckCircle, XCircle, Code, Layers3, Zap } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 export default function VectorTheoryPage() {
@@ -200,3 +200,6 @@ export default function VectorTheoryPage() {
     </div>
   );
 }
+    
+
+    
