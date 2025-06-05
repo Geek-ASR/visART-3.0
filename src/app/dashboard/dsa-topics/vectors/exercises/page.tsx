@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, BookOpen, LayoutGrid, FunctionSquare, Code2, HelpCircle, FileCode2, PlayCircle, Layers3 } from 'lucide-react';
+import { ArrowLeft, BookOpen, LayoutGrid, FunctionSquare, Code2, HelpCircle, FileCode2, PlayCircle, Layers3, Zap } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
@@ -26,11 +26,12 @@ const vectorExercisesData: ExerciseDetail[] = [
     id: 'vectors-ex1',
     exerciseNumber: 'Exercise 01',
     components: [
-      { icon: BookOpen, label: 'Theory' },
-      { icon: LayoutGrid, label: 'Applications & Amortized Analysis' },
+      { icon: BookOpen, label: 'Theory & Concepts' },
+      { icon: LayoutGrid, label: 'Applications' },
+      { icon: Zap, label: 'Amortized Analysis' },
     ],
     actionText: 'View',
-    actionLink: '#', // Placeholder for actual theory page
+    actionLink: '/dashboard/dsa-topics/vectors/exercises/theory-applications-amortized',
   },
   {
     id: 'vectors-ex2',
