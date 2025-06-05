@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, BookOpen, LayoutGrid, FunctionSquare, Code2, HelpCircle, FileCode2, PlayCircle, Layers3 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -72,12 +73,17 @@ const vectorExercisesData: ExerciseDetail[] = [
 
 export default function VectorExercisesPage() {
   const totalExercises = vectorExercisesData.length;
-  // Placeholder date, replace with actual or dynamic date later
-  const lastUpdatedDate = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const [lastUpdatedDate, setLastUpdatedDate] = useState<string>('Loading...');
+
+  useEffect(() => {
+    setLastUpdatedDate(
+      new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    );
+  }, []);
 
 
   return (
