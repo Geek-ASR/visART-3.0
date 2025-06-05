@@ -10,7 +10,18 @@ import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Prism from 'prismjs';
-// Language components (prism-cpp, prism-python, prism-java) will be dynamically imported in useEffect.
+import { ClientOnly } from '@/components/layout/ClientOnly';
+
+// Helper to escape HTML for initial display before highlighting
+function escapeHtml(unsafe: string): string {
+  if (typeof unsafe !== 'string') return '';
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 const pseudoCode = {
   access: `FUNCTION getElement(array, index)
@@ -59,6 +70,15 @@ END FUNCTION`,
   RETURN -1 // Element not found
 END FUNCTION`,
 };
+
+const pseudoCodeTitles: Record<keyof typeof pseudoCode, string> = {
+  access: "Accessing Element",
+  insertEnd: "Insertion at End",
+  insertMiddle: "Insertion at Index",
+  delete: "Deletion at Index",
+  search: "Linear Search",
+};
+
 
 const codeExamples = {
   cpp: {
@@ -140,8 +160,20 @@ export default function ArrayAlgorithmCodePage() {
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageKey>('cpp');
   const [languagesLoaded, setLanguagesLoaded] = useState(false);
 
+  // Initialize state for highlighted HTML strings
+  const initialPseudoHtml: Record<string, string> = {};
+  for (const key in pseudoCode) {
+    initialPseudoHtml[key] = escapeHtml(pseudoCode[key as keyof typeof pseudoCode]);
+  }
+  const [highlightedPseudoCode, setHighlightedPseudoCode] = useState<Record<string, string>>(initialPseudoHtml);
+
+  const [highlightedCodeExample, setHighlightedCodeExample] = useState<string>(
+    escapeHtml(codeExamples[selectedLanguage as LanguageKey].code)
+  );
+
   useEffect(() => {
     async function loadLanguages() {
+      // Dynamically import language components
       await import('prismjs/components/prism-clike');
       await import('prismjs/components/prism-c');
       await import('prismjs/components/prism-cpp');
@@ -155,18 +187,48 @@ export default function ArrayAlgorithmCodePage() {
     }
   }, []); // Empty dependency array ensures this runs once on mount
 
+  // Effect to highlight pseudo-code
   useEffect(() => {
-    if (languagesLoaded) {
-      // Highlight all code blocks on language change or initial render if languages are loaded
-      // setTimeout ensures DOM is ready for Prism to find elements
-      const timer = setTimeout(() => {
-        if (typeof Prism !== 'undefined' && Prism.highlightAll) {
-          Prism.highlightAll();
-        }
-      }, 0);
-      return () => clearTimeout(timer);
+    if (typeof window !== 'undefined' && languagesLoaded && Prism?.languages?.clike) {
+      const newHighlighted: Record<string, string> = {};
+      for (const key in pseudoCode) {
+        const code = pseudoCode[key as keyof typeof pseudoCode];
+        newHighlighted[key] = Prism.highlight(code, Prism.languages.clike, 'clike');
+      }
+      setHighlightedPseudoCode(newHighlighted);
     }
-  }, [selectedLanguage, languagesLoaded]); // Re-run when selectedLanguage or languagesLoaded changes
+  }, [languagesLoaded]); // Re-run when languages are loaded
+
+  // Effect to highlight main code example
+  useEffect(() => {
+    if (typeof window !== 'undefined' && languagesLoaded && Prism?.languages && Prism.languages[selectedLanguage]) {
+      const currentCode = codeExamples[selectedLanguage].code;
+      setHighlightedCodeExample(Prism.highlight(currentCode, Prism.languages[selectedLanguage], selectedLanguage));
+    } else if (typeof window !== 'undefined') { // Fallback before languages are loaded for selected language
+      setHighlightedCodeExample(escapeHtml(codeExamples[selectedLanguage].code));
+    }
+  }, [selectedLanguage, languagesLoaded]);
+
+
+  const pseudoCodeFallback = (
+    <div className="space-y-6">
+      {Object.keys(pseudoCode).map((key) => (
+        <div key={key}>
+          <h3 className="text-lg font-medium text-foreground mb-2">{pseudoCodeTitles[key as keyof typeof pseudoCodeTitles]}</h3>
+          <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+            <code className="font-code block whitespace-pre-wrap">
+              {pseudoCode[key as keyof typeof pseudoCode]}
+            </code>
+          </pre>
+        </div>
+      ))}
+    </div>
+  );
+
+  const codeImplementationsFallback = (
+    <p className="p-4 text-muted-foreground">Loading code examples...</p>
+  );
+
 
   return (
     <div className="space-y-8">
@@ -220,46 +282,19 @@ export default function ArrayAlgorithmCodePage() {
           <CardDescription>High-level logic for fundamental array operations.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Accessing Element</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
-              <code className="language-clike font-code block whitespace-pre-wrap">
-                {pseudoCode.access}
-              </code>
-            </pre>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Insertion at End</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
-              <code className="language-clike font-code block whitespace-pre-wrap">
-                {pseudoCode.insertEnd}
-              </code>
-            </pre>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Insertion at Index</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
-              <code className="language-clike font-code block whitespace-pre-wrap">
-                {pseudoCode.insertMiddle}
-              </code>
-            </pre>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Deletion at Index</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
-              <code className="language-clike font-code block whitespace-pre-wrap">
-                {pseudoCode.delete}
-              </code>
-            </pre>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-foreground mb-2">Linear Search</h3>
-            <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
-              <code className="language-clike font-code block whitespace-pre-wrap">
-                {pseudoCode.search}
-              </code>
-            </pre>
-          </div>
+          <ClientOnly fallback={pseudoCodeFallback}>
+            {(Object.keys(pseudoCode) as Array<keyof typeof pseudoCode>).map((key) => (
+              <div key={key}>
+                <h3 className="text-lg font-medium text-foreground mb-2">{pseudoCodeTitles[key]}</h3>
+                <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+                  <code
+                    className="language-clike font-code block whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{ __html: highlightedPseudoCode[key] }}
+                  />
+                </pre>
+              </div>
+            ))}
+          </ClientOnly>
         </CardContent>
       </Card>
 
@@ -273,39 +308,42 @@ export default function ArrayAlgorithmCodePage() {
           <CardDescription>Basic array usage examples in C++, Python, and Java.</CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs value={selectedLanguage} onValueChange={(value) => setSelectedLanguage(value as LanguageKey)} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-4">
-              <TabsTrigger value="cpp">C++</TabsTrigger>
-              <TabsTrigger value="python">Python</TabsTrigger>
-              <TabsTrigger value="java">Java</TabsTrigger>
-            </TabsList>
-            {(Object.keys(codeExamples) as LanguageKey[]).map((lang) => (
-              <TabsContent key={lang} value={lang}>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-md font-medium text-foreground mb-2">Code:</h4>
-                    <ScrollArea className="h-[300px] w-full rounded-md border bg-card"> {/* bg-card as fallback */}
-                      <pre className="!m-0 h-full"> {/* Base styles for pre, Prism theme will add more */}
-                        <code className={`language-${lang} text-sm font-code block whitespace-pre-wrap`}>
-                          {codeExamples[lang].code}
-                        </code>
-                      </pre>
-                    </ScrollArea>
+          <ClientOnly fallback={codeImplementationsFallback}>
+            <Tabs value={selectedLanguage} onValueChange={(value) => setSelectedLanguage(value as LanguageKey)} className="w-full">
+              <TabsList className="grid w-full grid-cols-3 mb-4">
+                <TabsTrigger value="cpp">C++</TabsTrigger>
+                <TabsTrigger value="python">Python</TabsTrigger>
+                <TabsTrigger value="java">Java</TabsTrigger>
+              </TabsList>
+              {(Object.keys(codeExamples) as LanguageKey[]).map((lang) => (
+                <TabsContent key={lang} value={lang}>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-md font-medium text-foreground mb-2">Code:</h4>
+                      <ScrollArea className="h-[300px] w-full rounded-md border bg-card">
+                        <pre className="!m-0 h-full"> 
+                          <code 
+                            className={`language-${lang} text-sm font-code block whitespace-pre-wrap`}
+                            dangerouslySetInnerHTML={{ __html: lang === selectedLanguage ? highlightedCodeExample : escapeHtml(codeExamples[lang].code) }}
+                          />
+                        </pre>
+                      </ScrollArea>
+                    </div>
+                    <div>
+                      <h4 className="text-md font-medium text-foreground mb-1 flex items-center">
+                          <Terminal className="h-4 w-4 mr-2 text-muted-foreground" /> Output:
+                      </h4>
+                      <ScrollArea className="h-[100px] w-full rounded-md border bg-black text-green-400 p-1">
+                         <pre className="p-3 text-sm font-code whitespace-pre-wrap">
+                           {codeExamples[lang].output}
+                         </pre>
+                      </ScrollArea>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-md font-medium text-foreground mb-1 flex items-center">
-                        <Terminal className="h-4 w-4 mr-2 text-muted-foreground" /> Output:
-                    </h4>
-                    <ScrollArea className="h-[100px] w-full rounded-md border bg-black text-green-400 p-1">
-                       <pre className="p-3 text-sm font-code whitespace-pre-wrap">
-                         {codeExamples[lang].output}
-                       </pre>
-                    </ScrollArea>
-                  </div>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </ClientOnly>
         </CardContent>
       </Card>
     </div>
