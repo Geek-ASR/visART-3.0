@@ -63,10 +63,10 @@ const arrayExercisesData: ExerciseDetail[] = [
     id: 'arrays-ex5',
     exerciseNumber: 'Exercise 05',
     components: [
-      { icon: FileCode2, label: 'Challenge 1: Two Sum' }, // Updated label
+      { icon: FileCode2, label: 'Challenge 1: Two Sum' },
     ],
     actionText: 'Solve',
-    actionLink: '/dashboard/dsa-topics/arrays/challenge/two-sum', // Updated link
+    actionLink: '/dashboard/dsa-topics/arrays/challenge/two-sum',
   },
 ];
 
@@ -92,7 +92,7 @@ export default function ArrayExercisesPage() {
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
            <Button variant="default" size="sm" asChild>
-            <Link href="#">
+            <Link href="/dashboard/dsa-topics/arrays/visualizer/memory-operations">
               <PlayCircle className="mr-2 h-4 w-4" /> Start Arrays Visualization
             </Link>
           </Button>
