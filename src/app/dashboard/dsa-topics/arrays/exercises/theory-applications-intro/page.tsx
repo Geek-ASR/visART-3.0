@@ -104,10 +104,10 @@ export default function ArrayTheoryApplicationsPage() {
                     <li>Heaps (binary heaps can be efficiently represented in arrays).</li>
                 </ul>
               </li>
-              <li><strong>Lookup Tables & Caching:</strong> Direct mapping of keys to values, like character counts or precomputed results.</li>
-              <li><strong>Representing Grids & Matrices:</strong> Essential for tasks like image processing (pixel data), game boards (chess, Sudoku), and mathematical computations.</li>
+              <li><strong>Lookup Tables &amp; Caching:</strong> Direct mapping of keys to values, like character counts or precomputed results.</li>
+              <li><strong>Representing Grids &amp; Matrices:</strong> Essential for tasks like image processing (pixel data), game boards (chess, Sudoku), and mathematical computations.</li>
               <li><strong>String Implementation:</strong> Strings are often implemented as arrays of characters.</li>
-              <li><strong>Sorting & Searching Algorithms:</strong> Many fundamental algorithms like Bubble Sort, Merge Sort, and Binary Search operate directly on arrays.</li>
+              <li><strong>Sorting &amp; Searching Algorithms:</strong> Many fundamental algorithms like Bubble Sort, Merge Sort, and Binary Search operate directly on arrays.</li>
             </ul>
           </CardContent>
         </Card>
@@ -117,7 +117,7 @@ export default function ArrayTheoryApplicationsPage() {
           <CardHeader>
              <div className="flex items-center space-x-3">
               <Code className="h-7 w-7 text-primary" />
-              <CardTitle className="text-2xl font-semibold">Pros & Cons of Arrays</CardTitle>
+              <CardTitle className="text-2xl font-semibold">Pros &amp; Cons of Arrays</CardTitle>
             </div>
             <CardDescription>A balanced view of when to use arrays and their limitations.</CardDescription>
           </CardHeader>
@@ -150,3 +150,4 @@ export default function ArrayTheoryApplicationsPage() {
     </div>
   );
 }
+
