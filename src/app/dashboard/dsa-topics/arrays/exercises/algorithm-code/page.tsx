@@ -215,7 +215,7 @@ export default function ArrayAlgorithmCodePage() {
       {Object.keys(pseudoCode).map((key) => (
         <div key={key}>
           <h3 className="text-lg font-medium text-foreground mb-2">{pseudoCodeTitles[key as keyof typeof pseudoCodeTitles]}</h3>
-          <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+          <pre className="bg-code-editor-dark p-4 rounded-md text-sm overflow-x-auto">
             <code className="font-code block whitespace-pre-wrap">
               {pseudoCode[key as keyof typeof pseudoCode]}
             </code>
@@ -286,7 +286,7 @@ export default function ArrayAlgorithmCodePage() {
             {(Object.keys(pseudoCode) as Array<keyof typeof pseudoCode>).map((key) => (
               <div key={key}>
                 <h3 className="text-lg font-medium text-foreground mb-2">{pseudoCodeTitles[key]}</h3>
-                <pre className="bg-muted/50 p-4 rounded-md text-sm overflow-x-auto">
+                <pre className="bg-code-editor-dark p-4 rounded-md text-sm overflow-x-auto">
                   <code
                     className="language-clike font-code block whitespace-pre-wrap"
                     dangerouslySetInnerHTML={{ __html: highlightedPseudoCode[key] }}
@@ -320,8 +320,8 @@ export default function ArrayAlgorithmCodePage() {
                   <div className="space-y-4">
                     <div>
                       <h4 className="text-md font-medium text-foreground mb-2">Code:</h4>
-                      <ScrollArea className="h-[300px] w-full rounded-md border bg-card">
-                        <pre className="!m-0 h-full"> 
+                      <ScrollArea className="h-[300px] w-full rounded-md border">
+                        <pre className="!m-0 h-full bg-code-editor-dark"> 
                           <code 
                             className={`language-${lang} text-sm font-code block whitespace-pre-wrap`}
                             dangerouslySetInnerHTML={{ __html: lang === selectedLanguage ? highlightedCodeExample : escapeHtml(codeExamples[lang].code) }}

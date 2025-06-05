@@ -110,6 +110,9 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  .bg-code-editor-dark {
+    background-color: #272822; /* Okaidia's default background */
+  }
 }
 
 /* Styles for PrismJS theme to ensure it fits well with ScrollArea and Tailwind */
@@ -119,45 +122,25 @@ pre[class*="language-"] {
 
 code[class*="language-"] {
   @apply font-code text-sm; /* Apply our consistent code font and size */
+  /* Text color will primarily come from prism-okaidia.css when on .bg-code-editor-dark */
 }
-
-/*
-  PrismJS okaidia theme specific overrides for LIGHT MODE.
-  Okaidia is a dark theme, so its default text colors are light.
-  These rules make it readable on light backgrounds like `bg-card`.
-*/
-body:not(.dark) pre[class*="language-"]:not(.bg-muted),
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) code[class*="language-"] {
-  color: hsl(var(--foreground)); /* Default text to theme's main foreground */
-}
-
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.comment,
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.prolog,
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.doctype,
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.cdata {
-  color: hsl(var(--muted-foreground)); /* Darker, muted color for comments */
-}
-
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.punctuation {
-  color: hsl(var(--foreground)); /* Punctuation also needs to be dark */
-}
-
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.operator,
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.entity,
-body:not(.dark) pre[class*="language-"]:not(.bg-muted) .token.url {
-  /* .language-css .token.string, .style .token.string are often styled with operator */
-  color: hsl(var(--foreground)); /* Operators and similar tokens to be dark */
-}
-/* End of LIGHT MODE overrides for okaidia on non-bg-muted pre blocks */
-
 
 /* Default comment color from PrismJS can be too light or dark depending on theme */
 /* This general rule helps but might be overridden by more specific ones above or below. */
+/* For .bg-code-editor-dark, prism-okaidia's comment color (e.g., #75715E) should take precedence. */
+/* For other contexts (like pre.bg-muted), this might still be relevant. */
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply text-muted-foreground;
+  @apply text-muted-foreground; 
+  /* On .bg-code-editor-dark, prism-okaidia.css's .token.comment should override this if more specific */
+}
+.bg-code-editor-dark .token.comment,
+.bg-code-editor-dark .token.prolog,
+.bg-code-editor-dark .token.doctype,
+.bg-code-editor-dark .token.cdata {
+  color: #75715E !important; /* Example: Force Okaidia's comment color on dark editor */
 }
 
 
@@ -203,4 +186,3 @@ pre.bg-muted code[class*="language-"] .token.doctype,
 pre.bg-muted code[class*="language-"] .token.cdata {
   color: hsl(var(--muted-foreground)) !important;
 }
-
