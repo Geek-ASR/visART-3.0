@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, FunctionSquare, Code2, Terminal } from 'lucide-react';
+import { ArrowLeft, FunctionSquare, Code2, Terminal, PlayCircle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -186,6 +186,29 @@ export default function ArrayAlgorithmCodePage() {
       </header>
 
       <Separator />
+
+      {/* Video Section */}
+      <Card className="bg-card shadow-md">
+        <CardHeader>
+          <div className="flex items-center space-x-3">
+            <PlayCircle className="h-7 w-7 text-primary" />
+            <CardTitle className="text-2xl font-semibold">Visual Explanation: Arrays Fundamentals</CardTitle>
+          </div>
+          <CardDescription>Watch this video for a comprehensive introduction to array data structures.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="aspect-video w-full">
+            <iframe
+              className="w-full h-full rounded-md border"
+              src="https://www.youtube.com/embed/8wmn7k1TTcI"
+              title="YouTube video player - Arrays Explained"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Algorithm Section */}
       <Card className="bg-card shadow-md">
