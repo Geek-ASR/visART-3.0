@@ -63,10 +63,10 @@ const arrayExercisesData: ExerciseDetail[] = [
     id: 'arrays-ex5',
     exerciseNumber: 'Exercise 05',
     components: [
-      { icon: FileCode2, label: 'Challenge 1: Implement Array Rotation' },
+      { icon: FileCode2, label: 'Challenge 1: Two Sum' }, // Updated label
     ],
     actionText: 'Solve',
-    actionLink: '#',
+    actionLink: '/dashboard/dsa-topics/arrays/challenge/two-sum', // Updated link
   },
 ];
 
